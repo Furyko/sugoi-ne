@@ -2,8 +2,9 @@ body {
     margin: 0;
 }
 
+/* NAVBAR */
 .navbar {
-    border: 2px solid black;
+    border: 1px solid black;
     padding: 0.5rem;
     overflow: hidden;
     display: flex;
@@ -41,4 +42,13 @@ body {
 .go-to-buttons ul li a:hover {
     text-decoration: none;
     color: cyan;
+}
+
+/* FOOTER */
+.footer {
+    border: 1px solid black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
 }
