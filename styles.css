@@ -44,6 +44,33 @@ body {
     color: cyan;
 }
 
+/* HOME CONTENT */
+.cards-container {
+    border: 1px solid red; 
+    display: flex; 
+    margin: 20px;
+}
+
+.card {
+    height: 275px; 
+    width: 175px; 
+    border: 1px solid green; 
+    margin: 20px;
+}
+
+.card-image {
+    height: 250px;
+    overflow: hidden;
+    border: 1px solid red;
+}
+
+.card-title {
+    border: 1px solid blue;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 /* FOOTER */
 .footer {
     border: 1px solid black;
