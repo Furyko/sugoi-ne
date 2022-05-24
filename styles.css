@@ -44,6 +44,10 @@ body {
     color: cyan;
 }
 
+.current-page {
+    color: cyan;
+}
+
 /* HOME CONTENT */
 .cards-container {
     border: 1px solid red; 
