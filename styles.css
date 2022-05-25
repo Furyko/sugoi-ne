@@ -80,6 +80,44 @@ body {
     font-weight: bold;
 }
 
+/* Mobile size */
+@media only screen and (max-width: 412px) {
+    .cards-container {
+        border: 1px solid gray; 
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+    
+    .card {
+        height: 250px;
+        display: block;
+        border: 1px solid green;
+    }
+
+    .card a {
+        display: flex;
+        width: 23rem;
+    }
+    
+    .card-image {
+        height: 250px;
+        width: 50%;
+        overflow: hidden;
+        border: 1px solid blue;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .card-title {
+        width: 50%;
+        border: 1px solid blue;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
 /* FOOTER */
 .footer {
     border: 1px solid black;
