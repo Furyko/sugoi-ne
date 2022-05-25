@@ -52,20 +52,20 @@ body {
 .cards-container {
     border: 1px solid red; 
     display: grid;
-    grid-template-columns: repeat(6, 175px);
-    column-gap: 40px;
-    row-gap: 40px;
-    margin: 48px;
+    grid-template-columns: repeat(6, 11rem);
+    column-gap: 2.6rem;
+    row-gap: 2.6rem;
+    margin: 2.6rem;
 }
 
 .card {
-    height: 275px; 
-    width: 175px; 
+    height: 18rem; 
+    width: 11rem; 
     border: 1px solid green; 
 }
 
 .card-image {
-    height: 250px;
+    height: 16rem;
     overflow: hidden;
     border: 1px solid red;
     display:flex;
@@ -74,10 +74,12 @@ body {
 }
 
 .card-image img {
-    height: 250px;
+    height: 16rem;
 }
 
 .card-title {
+    height: 1.8rem;
+    overflow: hidden;
     border: 1px solid blue;
     text-align: center;
     font-size: 20px;
@@ -90,11 +92,11 @@ body {
         border: 1px solid gray; 
         display: flex;
         flex-direction: column;
-        margin: 20px;
+        margin: 1.3rem;
     }
     
     .card {
-        height: 250px;
+        height: 16rem;
         display: block;
         border: 1px solid green;
     }
@@ -105,7 +107,7 @@ body {
     }
     
     .card-image {
-        height: 250px;
+        height: 16rem;
         width: 50%;
         overflow: hidden;
         border: 1px solid blue;
@@ -115,10 +117,12 @@ body {
     }
 
     .card-image img {
-        height: 250px;
+        height: 16rem;
     }
     
     .card-title {
+        height: 16rem;
+        overflow: visible;
         width: 50%;
         border: 1px solid blue;
         font-size: 20px;
@@ -132,5 +136,5 @@ body {
     overflow: hidden;
     display: flex;
     justify-content: center;
-    padding: 40px;
+    padding: 3rem;
 }
