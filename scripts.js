@@ -61,4 +61,9 @@ async function getPreviousAnimeList() {
     showAnimeCards(previous_page) 
 }
 
+async function goToExactPage() {
+    let page = document.getElementById("page-value-input")
+    console.log("Going to page", page.value)
+}
+
 showAnimeCards();

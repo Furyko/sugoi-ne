@@ -87,9 +87,28 @@ body {
     font-weight: bold;
 }
 
-.previous-next-buttons-container {
-    text-align: center;
+.list-navigation {
     padding: 2rem;
+    border: 1px solid green;
+}
+
+.previous-next-buttons-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid red;
+}
+
+.previous-next-buttons-container form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid blue;
+}
+
+.page-number-input {
+    border: 1px solid orange;
+    width: 3rem;
 }
 
 /* Mobile size */

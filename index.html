@@ -32,9 +32,15 @@
         <main>
             <div class="cards-container" id="cards-container"></div>
         </main>
-        <div class="previous-next-buttons-container">
-            <button onclick="getPreviousAnimeList()">Previous</button>
-            <button onclick="getNextAnimeList()">Next</button>
+        <div class="list-navigation">
+            <div class="previous-next-buttons-container">
+                <button onclick="getPreviousAnimeList()">Anterior</button>
+                <form onsubmit="goToExactPage()">
+                    <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
+                    <input type="submit" value="Ir"/>
+                </form>
+                <button onclick="getNextAnimeList()">Siguiente</button>
+            </div>
         </div>
         <footer>
             <nav class='footer'>
