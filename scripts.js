@@ -1,17 +1,26 @@
 /* ANIME PAGE SECTION (Home page) */
 const apiUrlAnime = 'https://api.jikan.moe/v4/anime'
+let current_page
 
-async function getAnimeList() {
-    const res = await fetch(apiUrlAnime);
+async function getAnimeList(page) {
+    if (page) {
+        var res = await fetch(apiUrlAnime + "?page=" + page);
+    } else {
+        var res = await fetch(apiUrlAnime);
+    }
     const data = await res.json();
+    current_page = data.pagination.current_page
     return data;
 }
 
-async function showAnimeCards() {
-    const animeList = await getAnimeList()
+async function showAnimeCards(page) {
+    if (page) {
+        var animeList = await getAnimeList(page)
+    } else {
+        var animeList = await getAnimeList()
+    }
     const animeListData = await animeList.data
     animeListData.map((item) => {
-        console.log(item)
         let card = document.createElement("div")
         card.setAttribute("class", "card")
         let cardAnchor = document.createElement("a")
@@ -32,6 +41,15 @@ async function showAnimeCards() {
         let cardsContainer = document.getElementById("cards-container")
         cardsContainer.appendChild(card)
     })
+}
+
+async function getNextAnimeList() {
+    let cards = document.getElementById("cards-container")
+    while (cards.firstChild) {
+        cards.removeChild(cards.firstChild)
+    }
+    let next_page = current_page + 1
+    showAnimeCards(next_page)
 }
 
 showAnimeCards();
