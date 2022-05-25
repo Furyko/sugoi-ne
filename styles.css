@@ -99,12 +99,13 @@ body {
     .card {
         height: 16rem;
         display: block;
+        width: auto;
         border: 1px solid green;
     }
 
     .card a {
         display: flex;
-        width: 23rem;
+        margin: 0;
     }
     
     .card-image {
