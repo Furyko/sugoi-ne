@@ -88,7 +88,7 @@ body {
 }
 
 /* Mobile size */
-@media only screen and (max-width: 412px) {
+@media only screen and (max-width: 440px) {
     .cards-container {
         border: 1px solid gray; 
         display: flex;
@@ -128,6 +128,30 @@ body {
         border: 1px solid blue;
         font-size: 20px;
         font-weight: bold;
+    }
+}
+
+@media only screen and (max-width: 1308px) {
+    .cards-container {
+        grid-template-columns: repeat(5, 11rem);
+    }
+}
+
+@media only screen and (max-width: 1135px) {
+    .cards-container {
+        grid-template-columns: repeat(4, 11rem);
+    }
+}
+
+@media only screen and (max-width: 918px) {
+    .cards-container{
+        grid-template-columns: repeat(3, 11rem);
+    }
+}
+
+@media only screen and (max-width: 699px) {
+    .cards-container{
+        grid-template-columns: repeat(2, 11rem);
     }
 }
 
