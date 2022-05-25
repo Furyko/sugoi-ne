@@ -107,6 +107,7 @@ body {
 }
 
 .page-number-input {
+    text-align: center;
     border: 1px solid orange;
     width: 3rem;
 }
