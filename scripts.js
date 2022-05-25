@@ -22,7 +22,6 @@ async function showAnimeCards() {
         cardAnchor.appendChild(cardImageContainer)
         let cardImage = document.createElement("img")
         cardImage.setAttribute("src",item.images.jpg.image_url)
-        cardImage.setAttribute("height", "250px")
         cardImageContainer.appendChild(cardImage)
         let cardTitle = document.createElement("div")
         cardTitle.setAttribute("class", "card-title")

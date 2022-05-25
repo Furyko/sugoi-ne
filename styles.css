@@ -73,6 +73,10 @@ body {
     align-items: center;
 }
 
+.card-image img {
+    height: 250px;
+}
+
 .card-title {
     border: 1px solid blue;
     text-align: center;
@@ -108,6 +112,10 @@ body {
         display:flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .card-image img {
+        height: 250px;
     }
     
     .card-title {
