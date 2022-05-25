@@ -1,6 +1,6 @@
 /* ANIME PAGE SECTION (Home page) */
 const apiUrlAnime = 'https://api.jikan.moe/v4/anime'
-let current_page
+let currentPage
 
 async function getAnimeList(page) {
     if (page) {
@@ -9,7 +9,7 @@ async function getAnimeList(page) {
         var res = await fetch(apiUrlAnime);
     }
     const data = await res.json();
-    current_page = data.pagination.current_page
+    currentPage = data.pagination.current_page
     return data;
 }
 
@@ -41,6 +41,18 @@ async function showAnimeCards(page) {
         let cardsContainer = document.getElementById("cards-container")
         cardsContainer.appendChild(card)
     })
+    showAnimeListInfo(await animeList)
+}
+
+async function showAnimeListInfo(data) {
+    let animeListData = data
+    let pagesTotal = document.createElement("span")
+    pagesTotal.innerHTML = "Total de paginas: "
+    let currentPage = document.createElement("span")
+    currentPage.innerHTML = "Pagina actual: " + animeListData.pagination.current_page
+    let infoContainer = document.getElementById("list-info-container")
+    infoContainer.appendChild(pagesTotal)
+    infoContainer.appendChild(currentPage)
 }
 
 async function getNextAnimeList() {
@@ -48,8 +60,12 @@ async function getNextAnimeList() {
     while (cards.firstChild) {
         cards.removeChild(cards.firstChild)
     }
-    let next_page = current_page + 1
-    showAnimeCards(next_page)
+    let infoContainer = document.getElementById("list-info-container")
+    while (infoContainer.firstChild) {
+        infoContainer.removeChild(infoContainer.firstChild)
+    }
+    let nextPage = currentPage + 1
+    showAnimeCards(nextPage)
 }
 
 async function getPreviousAnimeList() {
@@ -57,8 +73,12 @@ async function getPreviousAnimeList() {
     while (cards.firstChild) {
         cards.removeChild(cards.firstChild)
     }
-    let previous_page = current_page - 1
-    showAnimeCards(previous_page) 
+    let infoContainer = document.getElementById("list-info-container")
+    while (infoContainer.firstChild) {
+        infoContainer.removeChild(infoContainer.firstChild)
+    }
+    let previousPage = currentPage - 1
+    showAnimeCards(previousPage)
 }
 
 async function goToExactPage() {
