@@ -52,4 +52,13 @@ async function getNextAnimeList() {
     showAnimeCards(next_page)
 }
 
+async function getPreviousAnimeList() {
+    let cards = document.getElementById("cards-container")
+    while (cards.firstChild) {
+        cards.removeChild(cards.firstChild)
+    }
+    let previous_page = current_page - 1
+    showAnimeCards(previous_page) 
+}
+
 showAnimeCards();
