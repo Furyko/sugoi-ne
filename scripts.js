@@ -53,6 +53,7 @@ async function showAnimeListInfo(data) {
     let infoContainer = document.getElementById("list-info-container")
     infoContainer.appendChild(pagesTotal)
     infoContainer.appendChild(currentPage)
+    updateGoToPageButtons(data)
 }
 
 function cleanAnimeList() {
@@ -80,9 +81,23 @@ async function getPreviousAnimeList() {
 
 async function goToExactPage() {
     let page = document.getElementById("page-value-input")
-    console.log("Going to page", page.value)
     cleanAnimeList()
     showAnimeCards(page.value)
+}
+
+function updateGoToPageButtons(data) {
+    let nextButton = document.getElementById("next-button")
+    let previousBtton = document.getElementById("previous-button")
+    if (!data.pagination.has_next_page) {
+        nextButton.disabled = true;
+    } else {
+        nextButton.disabled = false;
+    }
+    if (data.pagination.current_page == 1) {
+        previousBtton.disabled = true;
+    } else {
+        previousBtton.disabled = false;
+    }
 }
 
 showAnimeCards();
