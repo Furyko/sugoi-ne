@@ -136,7 +136,9 @@ async function searchAnimeByName() {
 }
 
 async function startAnimePage() {
+    displayLoadingFeedback()
     showAnimeCards(await getAnimeList());
+    cleanLoadingFeedback()
 }
 
-startAnimePage()
+setTimeout(function() { startAnimePage() }, 1);
