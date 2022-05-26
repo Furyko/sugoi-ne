@@ -36,9 +36,9 @@
             <div class="list-info-container" id="list-info-container"></div>
             <div class="previous-next-buttons-container">
                 <button onclick="getPreviousAnimeList()">Anterior</button>
-                <form onsubmit="goToExactPage()">
+                <form action="#">
                     <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
-                    <input type="submit" value="Ir"/>
+                    <input type="button" value="Ir" onclick="goToExactPage()"/>
                 </form>
                 <button onclick="getNextAnimeList()">Siguiente</button>
             </div>
