@@ -47,7 +47,7 @@ async function showAnimeCards(page) {
 async function showAnimeListInfo(data) {
     let animeListData = data
     let pagesTotal = document.createElement("span")
-    pagesTotal.innerHTML = "Total de paginas: "
+    pagesTotal.innerHTML = "Total de paginas: " + animeListData.pagination.last_visible_page
     let currentPage = document.createElement("span")
     currentPage.innerHTML = "Pagina actual: " + animeListData.pagination.current_page
     let infoContainer = document.getElementById("list-info-container")
