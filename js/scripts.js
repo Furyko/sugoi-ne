@@ -59,11 +59,17 @@ async function showAnimeListInfo(data) {
 function displayLoadingFeedback() {
     let loadingAnimationContainer = document.createElement("div")
     loadingAnimationContainer.setAttribute("class", "loading-animation-container")
+    loadingAnimationContainer.setAttribute("id", "loading-animation-container")
     let loadingFeedback = document.createElement("div")
     loadingFeedback.setAttribute("class", "loading-animation")
     loadingAnimationContainer.appendChild(loadingFeedback)
     let mainContainer = document.getElementById("main-container")
     mainContainer.appendChild(loadingAnimationContainer)
+}
+
+function cleanLoadingFeedback() {
+    let loadingAnimationContainer = document.getElementById("loading-animation-container")
+    loadingAnimationContainer.remove()
 }
 
 function cleanAnimeList() {
@@ -78,24 +84,30 @@ function cleanAnimeList() {
 }
 
 async function getNextAnimeList() {
+    displayLoadingFeedback()
     cleanAnimeList()
     let nextPage = currentPage + 1
     const data = await getAnimeList("page", nextPage)
     showAnimeCards(await data)
+    cleanLoadingFeedback()
 }
 
 async function getPreviousAnimeList() {
+    displayLoadingFeedback()
     cleanAnimeList()
     let previousPage = currentPage - 1
     const data = await getAnimeList("page", previousPage)
     showAnimeCards(await data)
+    cleanLoadingFeedback()
 }
 
 async function goToExactPage() {
+    displayLoadingFeedback()
     let page = document.getElementById("page-value-input")
     cleanAnimeList()
     const data = await getAnimeList("page", page.value)
     showAnimeCards(await data)
+    cleanLoadingFeedback()
 }
 
 function updateGoToPageButtons(data) {
@@ -114,11 +126,13 @@ function updateGoToPageButtons(data) {
 }
 
 async function searchAnimeByName() {
+    displayLoadingFeedback()
+    cleanAnimeList()
     let searchValue = document.getElementById("search-bar")
     searchNameParam = "&q=" + searchValue.value
     let data = await getAnimeList()
-    cleanAnimeList()
     showAnimeCards(await data)
+    cleanLoadingFeedback()
 }
 
 async function startAnimePage() {
