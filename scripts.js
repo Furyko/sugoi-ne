@@ -1,12 +1,17 @@
 /* ANIME PAGE SECTION (Home page) */
 const apiUrlAnime = 'https://api.jikan.moe/v4/anime?sfw=true'
 let currentPage
+let searchNameParam = ""
 
 async function getAnimeList(param, value) {
     if (param) {
-        var res = await fetch(apiUrlAnime + "&" + param + "=" + value);
+        var res = await fetch(apiUrlAnime + "&" + param + "=" + value + searchNameParam);
     } else {
-        var res = await fetch(apiUrlAnime);
+        if (searchNameParam == "") {
+            var res = await fetch(apiUrlAnime);
+        } else {
+            var res = await fetch(apiUrlAnime + searchNameParam);
+        }
     }
     const data = await res.json();
     currentPage = data.pagination.current_page
@@ -100,7 +105,8 @@ function updateGoToPageButtons(data) {
 
 async function searchAnimeByName() {
     let searchValue = document.getElementById("search-bar")
-    let data = await getAnimeList("q", searchValue.value)
+    searchNameParam = "&q=" + searchValue.value
+    let data = await getAnimeList()
     console.log(await data)
     cleanAnimeList()
     showAnimeCards(await data)
