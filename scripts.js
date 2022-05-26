@@ -1,10 +1,10 @@
 /* ANIME PAGE SECTION (Home page) */
-const apiUrlAnime = 'https://api.jikan.moe/v4/anime'
+const apiUrlAnime = 'https://api.jikan.moe/v4/anime?sfw=true'
 let currentPage
 
 async function getAnimeList(param, value) {
     if (param) {
-        var res = await fetch(apiUrlAnime + "?" + param + "=" + value);
+        var res = await fetch(apiUrlAnime + "&" + param + "=" + value);
     } else {
         var res = await fetch(apiUrlAnime);
     }
