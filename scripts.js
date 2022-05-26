@@ -55,7 +55,7 @@ async function showAnimeListInfo(data) {
     infoContainer.appendChild(currentPage)
 }
 
-async function getNextAnimeList() {
+function cleanAnimeList() {
     let cards = document.getElementById("cards-container")
     while (cards.firstChild) {
         cards.removeChild(cards.firstChild)
@@ -64,19 +64,16 @@ async function getNextAnimeList() {
     while (infoContainer.firstChild) {
         infoContainer.removeChild(infoContainer.firstChild)
     }
+}
+
+async function getNextAnimeList() {
+    cleanAnimeList()
     let nextPage = currentPage + 1
     showAnimeCards(nextPage)
 }
 
 async function getPreviousAnimeList() {
-    let cards = document.getElementById("cards-container")
-    while (cards.firstChild) {
-        cards.removeChild(cards.firstChild)
-    }
-    let infoContainer = document.getElementById("list-info-container")
-    while (infoContainer.firstChild) {
-        infoContainer.removeChild(infoContainer.firstChild)
-    }
+    cleanAnimeList()
     let previousPage = currentPage - 1
     showAnimeCards(previousPage)
 }
