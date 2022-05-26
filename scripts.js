@@ -107,7 +107,6 @@ async function searchAnimeByName() {
     let searchValue = document.getElementById("search-bar")
     searchNameParam = "&q=" + searchValue.value
     let data = await getAnimeList()
-    console.log(await data)
     cleanAnimeList()
     showAnimeCards(await data)
 }
