@@ -98,6 +98,14 @@ function updateGoToPageButtons(data) {
     }
 }
 
+async function searchAnimeByName() {
+    let searchValue = document.getElementById("search-bar")
+    let data = await getAnimeList("q", searchValue.value)
+    console.log(await data)
+    cleanAnimeList()
+    showAnimeCards(await data)
+}
+
 async function startAnimePage() {
     showAnimeCards(await getAnimeList());
 }
