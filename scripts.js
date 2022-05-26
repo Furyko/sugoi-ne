@@ -2,9 +2,9 @@
 const apiUrlAnime = 'https://api.jikan.moe/v4/anime'
 let currentPage
 
-async function getAnimeList(page) {
-    if (page) {
-        var res = await fetch(apiUrlAnime + "?page=" + page);
+async function getAnimeList(param, value) {
+    if (param) {
+        var res = await fetch(apiUrlAnime + "?" + param + "=" + value);
     } else {
         var res = await fetch(apiUrlAnime);
     }
@@ -13,9 +13,9 @@ async function getAnimeList(page) {
     return data;
 }
 
-async function showAnimeCards(page) {
-    if (page) {
-        var animeList = await getAnimeList(page)
+async function showAnimeCards(param, page) {
+    if (param) {
+        var animeList = await getAnimeList(param, page)
     } else {
         var animeList = await getAnimeList()
     }
@@ -70,19 +70,19 @@ function cleanAnimeList() {
 async function getNextAnimeList() {
     cleanAnimeList()
     let nextPage = currentPage + 1
-    showAnimeCards(nextPage)
+    showAnimeCards("page", nextPage)
 }
 
 async function getPreviousAnimeList() {
     cleanAnimeList()
     let previousPage = currentPage - 1
-    showAnimeCards(previousPage)
+    showAnimeCards("page", previousPage)
 }
 
 async function goToExactPage() {
     let page = document.getElementById("page-value-input")
     cleanAnimeList()
-    showAnimeCards(page.value)
+    showAnimeCards("page", page.value)
 }
 
 function updateGoToPageButtons(data) {
