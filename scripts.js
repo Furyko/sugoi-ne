@@ -13,13 +13,8 @@ async function getAnimeList(param, value) {
     return data;
 }
 
-async function showAnimeCards(param, page) {
-    if (param) {
-        var animeList = await getAnimeList(param, page)
-    } else {
-        var animeList = await getAnimeList()
-    }
-    const animeListData = await animeList.data
+async function showAnimeCards(data) {
+    const animeListData = await data.data
     animeListData.map((item) => {
         let card = document.createElement("div")
         card.setAttribute("class", "card")
@@ -41,7 +36,7 @@ async function showAnimeCards(param, page) {
         let cardsContainer = document.getElementById("cards-container")
         cardsContainer.appendChild(card)
     })
-    showAnimeListInfo(await animeList)
+    showAnimeListInfo(await data)
 }
 
 async function showAnimeListInfo(data) {
@@ -70,19 +65,22 @@ function cleanAnimeList() {
 async function getNextAnimeList() {
     cleanAnimeList()
     let nextPage = currentPage + 1
-    showAnimeCards("page", nextPage)
+    const data = await getAnimeList("page", nextPage)
+    showAnimeCards(await data)
 }
 
 async function getPreviousAnimeList() {
     cleanAnimeList()
     let previousPage = currentPage - 1
-    showAnimeCards("page", previousPage)
+    const data = await getAnimeList("page", previousPage)
+    showAnimeCards(await data)
 }
 
 async function goToExactPage() {
     let page = document.getElementById("page-value-input")
     cleanAnimeList()
-    showAnimeCards("page", page.value)
+    const data = await getAnimeList("page", page.value)
+    showAnimeCards(await data)
 }
 
 function updateGoToPageButtons(data) {
@@ -100,4 +98,8 @@ function updateGoToPageButtons(data) {
     }
 }
 
-showAnimeCards();
+async function startAnimePage() {
+    showAnimeCards(await getAnimeList());
+}
+
+startAnimePage()
