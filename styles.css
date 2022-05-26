@@ -50,6 +50,17 @@ body {
 }
 
 /* HOME CONTENT */
+.search-bar-container {
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    border: 1px solid palevioletred;
+}
+
+.search-bar {
+    width: 100%;
+}
+
 .cards-container {
     border: 1px solid red; 
     display: grid;
