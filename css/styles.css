@@ -3,6 +3,35 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+/* Elements */
+.loading-animation-container {
+    border: 1px solid green;
+}
+
+.loading-animation {
+    display: flex;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: 10px solid #eee;
+    border-top: 10px solid #666;
+    border-radius: 50%;
+    animation-name: spin-loading;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes spin-loading {
+    from {
+        transform: rotate(0deg);
+    } 
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* NAVBAR */
 .navbar {
     border: 1px solid black;
@@ -61,13 +90,17 @@ body {
     width: 100%;
 }
 
+.main-container {
+    border: 1px solid gray;
+    margin: 2.6rem;
+}
+
 .cards-container {
     border: 1px solid red; 
     display: grid;
     grid-template-columns: repeat(6, 11rem);
     column-gap: 2.6rem;
     row-gap: 2.6rem;
-    margin: 2.6rem;
 }
 
 .card {
@@ -132,11 +165,16 @@ body {
 
 /* Mobile size */
 @media only screen and (max-width: 440px) {
+    .main-container {
+        display: block;
+        border: 1px solid red;
+        margin: 1.3rem;
+    }
+
     .cards-container {
         border: 1px solid gray; 
         display: flex;
         flex-direction: column;
-        margin: 1.3rem;
     }
     
     .card {
