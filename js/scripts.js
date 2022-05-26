@@ -56,6 +56,16 @@ async function showAnimeListInfo(data) {
     updateGoToPageButtons(data)
 }
 
+function displayLoadingFeedback() {
+    let loadingAnimationContainer = document.createElement("div")
+    loadingAnimationContainer.setAttribute("class", "loading-animation-container")
+    let loadingFeedback = document.createElement("div")
+    loadingFeedback.setAttribute("class", "loading-animation")
+    loadingAnimationContainer.appendChild(loadingFeedback)
+    let mainContainer = document.getElementById("main-container")
+    mainContainer.appendChild(loadingAnimationContainer)
+}
+
 function cleanAnimeList() {
     let cards = document.getElementById("cards-container")
     while (cards.firstChild) {
