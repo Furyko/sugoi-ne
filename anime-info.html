@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sugoi ne! - ¡Info de Manga, Anime, y Personajes!</title>
-        <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="stylesheet" href="css/anime-info.css"/>
         <script src="js/anime-info-script.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
     </head>
@@ -25,6 +25,53 @@
                 </div>
             </nav>
             <main>
+                <div class="main-container" id="main-container">
+                    <div class="anime-info">
+                        <div class="card-image"></div>
+                        <span class="anime-title">Titulo del anime</span>
+                        <div class="button bg-orange">Clasificación</div>
+                        <span>Título en inglés:</span>
+                        <span>Título en japones:</span>
+                        <span>Duración:</span>
+                        <div class="anime-type-airing display-flex">
+                            <div class="button bg-green">Type</div>
+                            <div class="button bg-red">Airing</div>
+                        </div>
+                        <div class="anime-synopsis">Sinopsis: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                        <div class="anime-genre display-flex">
+                            <div class="button bg-cyan">Genero 1</div>
+                            <div class="button bg-cyan">Genero 2</div>
+                        </div>
+                        <div class="anime-theme display-flex">
+                            <div class="button bg-blue">Tema 1</div>
+                        </div>
+                        <span>Estudios:</span>
+                        <span>Productores:</span>
+                        <span>Licenciantes:</span>
+                    </div>
+
+                    <div class="caroussel-container" id="images-caroussel-container">
+                        <span>Imágenes</span>
+                        <a class="caroussel-prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <div class="slides">
+                            <div class="caroussel-image" id="slide-1">1</div>
+                            <div class="caroussel-image" id="slide-2">2</div>
+                            <div class="caroussel-image" id="slide-3">3</div>
+                        </div>
+                        <a class="caroussel-next">&#10095;</a>
+                    </div>
+
+                    <div class="caroussel-container" id="reccomendations-caroussel-container">
+                        <span>Animes recomendados</span>
+                        <a class="caroussel-prev">&#10094;</a>
+                        <div class="slides">
+                            <div class="caroussel-image" id="slide-1">1</div>
+                            <div class="caroussel-image" id="slide-2">2</div>
+                            <div class="caroussel-image" id="slide-3">3</div>
+                        </div>
+                        <a class="caroussel-next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                </div>
             </main>
         </header>
     </body>

@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    border: 1px solid black;
+    padding: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar-title {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+}
+
+.navbar-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.go-to-buttons ul {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.go-to-buttons ul li {
+    list-style: none;
+    margin: 1rem;
+}
+
+.go-to-buttons ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.go-to-buttons ul li a:hover {
+    text-decoration: none;
+    color: cyan;
+}
+
+.current-page {
+    color: cyan;
+}
+
+/* ANIME INFO CONTENT */
+
+.main-container {
+    border: 1px solid gray;
+    margin: 2.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-image {
+    height: 16rem;
+    width: 50%;
+    overflow: hidden;
+    border: 1px solid red;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.anime-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.anime-title {
+    font-size: 1.5rem;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.button {
+    border-radius: 6px;
+    padding: 0.2rem;
+}
+
+.bg-orange {
+    background-color: orange;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-cyan {
+    background-color: cyan;
+}
+
+.bg-blue {
+    background-color: blue;
+}
+
+.anime-synopsis {
+    text-align: center;
+}
+
+/* Caroussel */
+.caroussel-container {
+    width: 100%;
+    border: 1px solid purple;
+}
+
+.caroussel-container span {
+    font-size: 1.5rem;
+}
+
+.slides {
+    border: 1px solid orange;
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    overflow: hidden;
+}
+
+.caroussel-image {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 16rem;
+    width: 8rem;
+    min-width: 10rem;
+    overflow: hidden;
+    border: 1px solid red;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FOOTER */
+.footer {
+    border: 1px solid black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem;
+}
