@@ -24,7 +24,7 @@ async function showAnimeCards(data) {
         let card = document.createElement("div")
         card.setAttribute("class", "card")
         let cardAnchor = document.createElement("a")
-        cardAnchor.setAttribute("href", "#")
+        cardAnchor.setAttribute("href", "anime-info.html?anime=" + item.mal_id)
         card.appendChild(cardAnchor)
         let cardImageContainer = document.createElement("div")
         cardImageContainer.setAttribute("class", "card-image")
