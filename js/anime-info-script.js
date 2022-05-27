@@ -13,8 +13,66 @@ async function getAnimeInfo() {
     return await jsonResponse
 }
 
+async function setAnimeInfo() {
+    const animeInfo = await getAnimeInfo()
+    let animeImage = document.getElementById('anime-image')
+    animeImage.setAttribute('src', animeInfo.data.images.jpg.image_url)
+    let animeTitle = document.getElementById('anime-title')
+    animeTitle.innerHTML = animeInfo.data.title
+    let rating = document.getElementById('rating')
+    rating.innerHTML = animeInfo.data.rating
+    let englishTitle = document.getElementById('anime-english-title')
+    englishTitle.innerHTML = 'Título en inglés: ' + animeInfo.data.title_english 
+    let japaneseTitle = document.getElementById('anime-japanese-title')
+    japaneseTitle.innerHTML = 'Título en japonés: ' + animeInfo.data.title_japanese
+    let animeDuration = document.getElementById('anime-duration')
+    let dateData = animeInfo.data.aired.prop
+    let from = dateData.from.day + '-' + dateData.from.month + '-' + dateData.from.year
+    let to = dateData.to.day + '-' + dateData.to.month + '-' + dateData.to.year
+    animeDuration.innerHTML = 'Duración: ' + from + ' a ' + to
+    let animeType = document.getElementById('anime-type')
+    animeType.innerHTML = animeInfo.data.type
+    let animeStatus = document.getElementById('anime-status')
+    if (animeInfo.data.airing) {
+        animeStatus.innerHTML = 'En emisión'
+        animeStatus.setAttribute('class', 'button bg-green')
+    } else {
+        animeStatus.innerHTML = 'Finalizado'
+        animeStatus.setAttribute('class', 'button bg-red')
+    }
+    let animeSynopsis = document.getElementById('anime-synopsis')
+    animeSynopsis.innerHTML = '<b>Sinopsis: </b>' + animeInfo.data.synopsis
+    let animeGenres = document.getElementById('anime-genres')
+    for (genre in animeInfo.data.genres) {
+        let genreElement = document.createElement('div')
+        genreElement.setAttribute('class', 'button bg-cyan')
+        genreElement.innerHTML = animeInfo.data.genres[genre].name
+        animeGenres.appendChild(genreElement)
+    }
+    let animeThemes = document.getElementById('anime-themes')
+    for (theme in animeInfo.data.themes) {
+        let themeElement = document.createElement('div')
+        themeElement.setAttribute('class', 'button bg-blue')
+        themeElement.innerHTML = animeInfo.data.themes[theme].name
+        animeThemes.appendChild(themeElement)
+    }
+    let animeStudios = document.getElementById('anime-studios')
+    for (studio in animeInfo.data.studios) {
+        animeStudios.innerHTML = animeStudios.innerHTML + animeInfo.data.studios[studio].name + ', '
+    }
+    let animeProducers = document.getElementById('anime-producers')
+    for (producer in animeInfo.data.producers) {
+        animeProducers.innerHTML = animeProducers.innerHTML + animeInfo.data.producers[producer].name + ', '
+    }
+    let animeLicensors = document.getElementById('anime-licensors')
+    for (licensor in animeInfo.data.licensors) {
+        animeLicensors.innerHTML = animeLicensors.innerHTML + animeInfo.data.licensors[licensor].name + ', '
+    }
+    
+}
+
 async function startAnimeInfoPage() {
-    console.log(await getAnimeInfo())
+    setAnimeInfo()
 }
 
 startAnimeInfoPage()
