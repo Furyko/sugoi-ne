@@ -3,6 +3,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 /* NAVBAR */
 .navbar {
     border: 1px solid black;
@@ -61,7 +65,7 @@ body {
 
 .card-image {
     height: 16rem;
-    width: 50%;
+    width: 55%;
     overflow: hidden;
     border: 1px solid red;
     display:flex;
@@ -73,6 +77,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.anime-info {
+    text-align: center;
+}
+
+.anime-image {
+    height: 16rem;
+    width: auto;
 }
 
 .anime-title {
@@ -117,8 +130,10 @@ body {
 
 /* Caroussel */
 .caroussel-container {
-    width: 100%;
     border: 1px solid purple;
+    max-width: 1000px;
+    position: relative;
+    width: 100%;
 }
 
 .caroussel-container span {
@@ -127,10 +142,17 @@ body {
 
 .slides {
     border: 1px solid orange;
-    width: 100%;
-    justify-content: space-around;
-    display: flex;
-    overflow: hidden;
+    text-align: center;
+    display: none;
+}
+
+.slides img {
+    border: 1px solid red;
+    height: 350px;
+}
+
+.slide-image {
+    height:400px;
 }
 
 .caroussel-image {
@@ -141,9 +163,37 @@ body {
     min-width: 10rem;
     overflow: hidden;
     border: 1px solid red;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 1.2rem;
+  margin-top: -22px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  color: #424242d2;
+}
+
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
 }
 
 /* FOOTER */

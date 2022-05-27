@@ -28,7 +28,7 @@
                 <div class="main-container" id="main-container">
                     <div class="anime-info">
                         <div class="card-image">
-                            <img id="anime-image"/>
+                            <img class="anime-image" id="anime-image"/>
                         </div>
                         <span class="anime-title" id="anime-title">Titulo del anime</span>
                         <div class="button bg-orange" id="rating">Clasificación</div>
@@ -49,24 +49,13 @@
 
                     <div class="caroussel-container" id="images-caroussel-container">
                         <span>Imágenes</span>
-                        <a class="caroussel-prev" onclick="plusSlides(-1)">&#10094;</a>
-                        <div class="slides">
-                            <div class="caroussel-image" id="slide-1">1</div>
-                            <div class="caroussel-image" id="slide-2">2</div>
-                            <div class="caroussel-image" id="slide-3">3</div>
-                        </div>
-                        <a class="caroussel-next">&#10095;</a>
                     </div>
 
                     <div class="caroussel-container" id="reccomendations-caroussel-container">
                         <span>Animes recomendados</span>
-                        <a class="caroussel-prev">&#10094;</a>
-                        <div class="slides">
-                            <div class="caroussel-image" id="slide-1">1</div>
-                            <div class="caroussel-image" id="slide-2">2</div>
-                            <div class="caroussel-image" id="slide-3">3</div>
-                        </div>
-                        <a class="caroussel-next" onclick="plusSlides(1)">&#10095;</a>
+                        <div class="slides-container" id="slides-container"></div>
+                        <a class="prev" onclick="changeSlide(-1)">❮</a>
+                        <a class="next" onclick="changeSlide(1)">❯</a>
                     </div>
                 </div>
             </main>

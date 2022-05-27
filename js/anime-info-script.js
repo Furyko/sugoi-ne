@@ -1,4 +1,5 @@
 const baseUrl = 'https://api.jikan.moe/v4/anime/'
+let slideIndex = 1;
 
 async function getParam() {
     const values = window.location.search
@@ -9,6 +10,12 @@ async function getParam() {
 
 async function getAnimeInfo() {
     let res = await fetch(baseUrl + await getParam())
+    let jsonResponse = await res.json()
+    return await jsonResponse
+}
+
+async function getAnimeRecommendations() {
+    let res = await fetch(baseUrl + await getParam() + '/recommendations')
     let jsonResponse = await res.json()
     return await jsonResponse
 }
@@ -68,11 +75,38 @@ async function setAnimeInfo() {
     for (licensor in animeInfo.data.licensors) {
         animeLicensors.innerHTML = animeLicensors.innerHTML + animeInfo.data.licensors[licensor].name + ', '
     }
-    
+    let animeRecommendations = await getAnimeRecommendations()
+    let slidesContainer = document.getElementById('slides-container')
+    await animeRecommendations.data.map((item) => {
+        let slideItem = document.createElement('div')
+        slideItem.setAttribute('class', 'slides')
+        slidesContainer.appendChild(slideItem)
+        let slideImage = document.createElement('img')
+        slideImage.setAttribute('src', item.entry.images.jpg.image_url)
+        slideItem.appendChild(slideImage)
+    })
+    let carousselFirstChild = slidesContainer.firstChild
+    carousselFirstChild.style.display = 'block'
+}
+
+function changeSlide(n) {
+  showSlides(slideIndex += n);
+}
+
+async function showSlides(n) {
+  let slides = await document.getElementsByClassName("slides")
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (var i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  console.log(slides[0])
+  slides[slideIndex-1].style.display = "block";
 }
 
 async function startAnimeInfoPage() {
     setAnimeInfo()
+    showSlides(slideIndex)
 }
 
 startAnimeInfoPage()
