@@ -96,7 +96,10 @@ async function showAnimeRecommendations() {
     await animeRecommendations.data.map((item) => {
         let slideItem = document.createElement('div')
         slideItem.setAttribute('class', 'slides-recommendations')
-        slidesContainer.appendChild(slideItem)
+        let anchor = document.createElement('a')
+        anchor.setAttribute('href', 'anime-info.html?anime=' + item.entry.mal_id)
+        anchor.appendChild(slideItem)
+        slidesContainer.appendChild(anchor)
         let slideImage = document.createElement('img')
         slideImage.setAttribute('src', item.entry.images.jpg.image_url)
         slideItem.appendChild(slideImage)
