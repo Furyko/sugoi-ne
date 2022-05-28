@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sugoi ne! - ¡Info de Manga, Anime, y Personajes!</title>
         <link rel="stylesheet" href="css/styles.css"/>
-        <script src="js/scripts.js"></script>
+        <script src="js/characters.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
     </head>
     <body>
@@ -29,5 +29,30 @@
                 </div>
             </nav>
         </header>
+        <div class="search-bar-container">
+            <input type="text" class="search-bar" placeholder="Busca un personaje por nombre" id="search-bar"/>
+            <input type="button" value="Buscar" onclick="searchCharacterByName()"/>
+        </div>
+        <main>
+            <div class="main-container" id="main-container">
+                <div class="cards-container" id="cards-container"></div>
+            </div>
+        </main>
+        <div class="list-navigation">
+            <div class="list-info-container" id="list-info-container"></div>
+            <div class="previous-next-buttons-container">
+                <button onclick="getPreviousCharactersList()" id="previous-button">Anterior</button>
+                <form action="#">
+                    <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
+                    <input type="button" value="Ir" onclick="goToExactPage()"/>
+                </form>
+                <button onclick="getNextCharactersList()" id="next-button">Siguiente</button>
+            </div>
+        </div>
+        <footer>
+            <nav class='footer'>
+                <a href="https://julian-palavecino.netlify.app/" target="_blank">Designed and developed by Julian Palavecino</a>
+            </nav>
+        </footer>
     </body>
 </html>
