@@ -73,6 +73,10 @@ async function setAnimeInfo() {
     for (licensor in animeInfo.data.licensors) {
         animeLicensors.innerHTML = animeLicensors.innerHTML + animeInfo.data.licensors[licensor].name + ', '
     }
+    showAnimeRecommendations()
+}
+
+async function showAnimeRecommendations() {
     let animeRecommendations = await getAnimeInfo('/recommendations')
     let slidesContainer = document.getElementById('slides-container')
     await animeRecommendations.data.map((item) => {
