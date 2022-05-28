@@ -8,14 +8,12 @@ async function getParam() {
     return animeId
 }
 
-async function getAnimeInfo() {
-    let res = await fetch(baseUrl + await getParam())
-    let jsonResponse = await res.json()
-    return await jsonResponse
-}
-
-async function getAnimeRecommendations() {
-    let res = await fetch(baseUrl + await getParam() + '/recommendations')
+async function getAnimeInfo(param) {
+    if (param) {
+        var res = await fetch(baseUrl + await getParam() + param)
+    } else {
+        var res = await fetch(baseUrl + await getParam())
+    }
     let jsonResponse = await res.json()
     return await jsonResponse
 }
@@ -75,7 +73,7 @@ async function setAnimeInfo() {
     for (licensor in animeInfo.data.licensors) {
         animeLicensors.innerHTML = animeLicensors.innerHTML + animeInfo.data.licensors[licensor].name + ', '
     }
-    let animeRecommendations = await getAnimeRecommendations()
+    let animeRecommendations = await getAnimeInfo('/recommendations')
     let slidesContainer = document.getElementById('slides-container')
     await animeRecommendations.data.map((item) => {
         let slideItem = document.createElement('div')
