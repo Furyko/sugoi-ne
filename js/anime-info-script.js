@@ -87,10 +87,11 @@ async function setAnimeInfo() {
     })
     let carousselFirstChild = slidesContainer.firstChild
     carousselFirstChild.style.display = 'block'
+    showSlides(slideIndex)
 }
 
 function changeSlide(n) {
-  showSlides(slideIndex += n);
+    showSlides(slideIndex += n);
 }
 
 async function showSlides(n) {
@@ -100,13 +101,11 @@ async function showSlides(n) {
     for (var i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-    console.log(slides[0])
     slides[slideIndex-1].style.display = "block";
 }
 
 async function startAnimeInfoPage() {
     setAnimeInfo()
-    showSlides(slideIndex)
 }
 
 startAnimeInfoPage()
