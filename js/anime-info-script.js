@@ -73,15 +73,29 @@ async function setAnimeInfo() {
     for (licensor in animeInfo.data.licensors) {
         animeLicensors.innerHTML = animeLicensors.innerHTML + animeInfo.data.licensors[licensor].name + ', '
     }
+    showAnimePictures()
     showAnimeRecommendations()
+}
+
+async function showAnimePictures() {
+    let animePictures = await getAnimeInfo('/pictures')
+    let slidesContainer = document.getElementById('pictures-slides-container')
+    await animePictures.data.map((item) => {
+        let slideItem = document.createElement('div')
+        slideItem.setAttribute('class', 'slides-pictures')
+        slidesContainer.appendChild(slideItem)
+        let slideImage = document.createElement('img')
+        slideImage.setAttribute('src', item.jpg.image_url)
+        slideItem.appendChild(slideImage)
+    })
 }
 
 async function showAnimeRecommendations() {
     let animeRecommendations = await getAnimeInfo('/recommendations')
-    let slidesContainer = document.getElementById('slides-container')
+    let slidesContainer = document.getElementById('recommendations-slides-container')
     await animeRecommendations.data.map((item) => {
         let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides')
+        slideItem.setAttribute('class', 'slides-recommendations')
         slidesContainer.appendChild(slideItem)
         let slideImage = document.createElement('img')
         slideImage.setAttribute('src', item.entry.images.jpg.image_url)
@@ -89,15 +103,16 @@ async function showAnimeRecommendations() {
     })
     let carousselFirstChild = slidesContainer.firstChild
     carousselFirstChild.style.display = 'block'
-    showSlides(slideIndex)
+    showSlides(slideIndex, 'pictures')
+    showSlides(slideIndex, 'recommendations')
 }
 
-function changeSlide(n) {
-    showSlides(slideIndex += n);
+function changeSlide(n, slide) {
+    showSlides(slideIndex += n, slide);
 }
 
-async function showSlides(n) {
-    let slides = await document.getElementsByClassName("slides")
+async function showSlides(n, slide) {
+    let slides = await document.getElementsByClassName('slides-' + slide)
     if (n > slides.length) {slideIndex = 1}
     if (n < 1) {slideIndex = slides.length}
     for (var i = 0; i < slides.length; i++) {

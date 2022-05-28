@@ -47,15 +47,18 @@
                         <span id="anime-licensors">Licenciantes: </span>
                     </div>
 
-                    <div class="caroussel-container" id="images-caroussel-container">
+                    <div class="caroussel-container" id="pictures-caroussel-container">
                         <span>Imágenes</span>
+                        <div class="slides-container" id="pictures-slides-container"></div>
+                        <a class="prev" onclick="changeSlide(-1, 'pictures')">❮</a>
+                        <a class="next" onclick="changeSlide(1, 'pictures')">❯</a>
                     </div>
 
-                    <div class="caroussel-container" id="reccomendations-caroussel-container">
+                    <div class="caroussel-container" id="recommendations-caroussel-container">
                         <span>Animes recomendados</span>
-                        <div class="slides-container" id="slides-container"></div>
-                        <a class="prev" onclick="changeSlide(-1)">❮</a>
-                        <a class="next" onclick="changeSlide(1)">❯</a>
+                        <div class="slides-container" id="recommendations-slides-container"></div>
+                        <a class="prev" onclick="changeSlide(-1, 'recommendations')">❮</a>
+                        <a class="next" onclick="changeSlide(1, 'recommendations')">❯</a>
                     </div>
                 </div>
             </main>

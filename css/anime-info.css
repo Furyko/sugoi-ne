@@ -140,13 +140,13 @@ body {
     font-size: 1.5rem;
 }
 
-.slides {
+.slides-pictures, .slides-recommendations {
     border: 1px solid orange;
     text-align: center;
     display: none;
 }
 
-.slides img {
+.slides-pictures img, .slides-recommendations img {
     border: 1px solid red;
     height: 350px;
 }
