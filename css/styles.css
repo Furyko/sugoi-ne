@@ -3,7 +3,8 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Elements */
+/* ELEMENTS */
+/*Loading animation*/
 .loading-animation-container {
     border: 1px solid green;
 }
@@ -30,6 +31,17 @@ body {
     to {
         transform: rotate(360deg);
     }
+}
+/*Card*/
+.card-element {
+    border: 1px solid black;
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+/* PROPERTIES */
+.center {
+    text-align: center;
 }
 
 /* NAVBAR */

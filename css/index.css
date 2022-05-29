@@ -1,0 +1,30 @@
+.home-card-container {
+    margin: 2.5rem;
+    display: grid;
+    row-gap: 1rem;
+    border: 1px solid red;
+}
+
+.welcome {
+    border: 1px solid blue;
+    padding: 1rem;
+}
+
+.welcome h2 {
+    font-weight: normal;
+}
+
+.home-card {
+    overflow: hidden;
+}
+
+.home-card span {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.home-card img {
+    height: 200px;
+    width: 200px;
+}
