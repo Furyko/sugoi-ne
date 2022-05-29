@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sugoi ne! - ¡Info de Manga, Anime, y Personajes!</title>
         <link rel="stylesheet" href="css/styles.css"/>
-        <script src="js/mangas.js"></script>
+        <script src="js/scripts.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
     </head>
     <body>
@@ -17,12 +17,12 @@
                 <div class='go-to-buttons-container'>
                     <div class='go-to-buttons'>
                         <ul>
-                            <li><a href="animes.html">Anime</a></li>
                             <li>
-                                <a href="mangas.html">
-                                    <span class="current-page">Manga</span>
+                                <a href="animes.html">
+                                    <span class="current-page">Anime</span>
                                 </a>
                             </li>
+                            <li><a href="mangas.html">Manga</a></li>
                             <li><a href="characters.html">Personajes</a></li>
                         </ul>
                     </div>
@@ -30,8 +30,8 @@
             </nav>
         </header>
         <div class="search-bar-container">
-            <input type="text" class="search-bar" placeholder="Busca un manga por nombre" id="search-bar"/>
-            <input type="button" value="Buscar" onclick="searchMangaByName()"/>
+            <input type="text" class="search-bar" placeholder="Busca un anime por nombre" id="search-bar"/>
+            <input type="button" value="Buscar" onclick="searchAnimeByName()"/>
         </div>
         <main>
             <div class="main-container" id="main-container">
@@ -41,12 +41,12 @@
         <div class="list-navigation">
             <div class="list-info-container" id="list-info-container"></div>
             <div class="previous-next-buttons-container">
-                <button onclick="getPreviousMangaList()" id="previous-button">Anterior</button>
+                <button onclick="getPreviousAnimeList()" id="previous-button">Anterior</button>
                 <form action="#">
                     <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
                     <input type="button" value="Ir" onclick="goToExactPage()"/>
                 </form>
-                <button onclick="getNextMangaList()" id="next-button">Siguiente</button>
+                <button onclick="getNextAnimeList()" id="next-button">Siguiente</button>
             </div>
         </div>
         <footer>

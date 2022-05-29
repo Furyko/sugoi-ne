@@ -17,11 +17,7 @@
                 <div class='go-to-buttons-container'>
                     <div class='go-to-buttons'>
                         <ul>
-                            <li>
-                                <a href="index.html">
-                                    <span class="current-page">Anime</span>
-                                </a>
-                            </li>
+                            <li><a href="animes.html">Anime</a></li>
                             <li><a href="mangas.html">Manga</a></li>
                             <li><a href="characters.html">Personajes</a></li>
                         </ul>
@@ -29,26 +25,6 @@
                 </div>
             </nav>
         </header>
-        <div class="search-bar-container">
-            <input type="text" class="search-bar" placeholder="Busca un anime por nombre" id="search-bar"/>
-            <input type="button" value="Buscar" onclick="searchAnimeByName()"/>
-        </div>
-        <main>
-            <div class="main-container" id="main-container">
-                <div class="cards-container" id="cards-container"></div>
-            </div>
-        </main>
-        <div class="list-navigation">
-            <div class="list-info-container" id="list-info-container"></div>
-            <div class="previous-next-buttons-container">
-                <button onclick="getPreviousAnimeList()" id="previous-button">Anterior</button>
-                <form action="#">
-                    <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
-                    <input type="button" value="Ir" onclick="goToExactPage()"/>
-                </form>
-                <button onclick="getNextAnimeList()" id="next-button">Siguiente</button>
-            </div>
-        </div>
         <footer>
             <nav class='footer'>
                 <a href="https://julian-palavecino.netlify.app/" target="_blank">Designed and developed by Julian Palavecino</a>
