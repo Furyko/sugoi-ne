@@ -12,7 +12,7 @@ async function getAnimeInfo(param) {
     if (param) {
         var res = await fetch(baseUrl + await getParam() + param)
     } else {
-        var res = await fetch(baseUrl + await getParam())
+        var res = await fetch(baseUrl + await getParam() + '/full')
     }
     let jsonResponse = await res.json()
     return await jsonResponse
