@@ -98,6 +98,7 @@ async function showMangaRecommendations() {
     carousselFirstChild.style.display = 'block'
     showSlides(slideIndex, 'pictures')
     showSlides(slideIndex, 'recommendations')
+    cleanLoadingFeedback()
 }
 
 function changeSlide(n, slide) {
@@ -114,8 +115,41 @@ async function showSlides(n, slide) {
     slides[slideIndex-1].style.display = "block";
 }
 
+function hideContentWhileLoading() {
+    let mangaInfoContainer = document.getElementById('manga-info')
+    mangaInfoContainer.style.display = 'none'
+    let picturesCaroussel = document.getElementById('pictures-caroussel-container')
+    picturesCaroussel.style.display = 'none'
+    let recommendationsCaroussel = document.getElementById('recommendations-caroussel-container')
+    recommendationsCaroussel.style.display = 'none'
+    displayLoadingFeedback()
+}
+
+function displayLoadingFeedback() {
+    let loadingAnimationContainer = document.createElement("div")
+    loadingAnimationContainer.setAttribute("class", "loading-animation-container")
+    loadingAnimationContainer.setAttribute("id", "loading-animation-container")
+    let loadingFeedback = document.createElement("div")
+    loadingFeedback.setAttribute("class", "loading-animation")
+    loadingAnimationContainer.appendChild(loadingFeedback)
+    let mainContainer = document.getElementById("main-container")
+    mainContainer.appendChild(loadingAnimationContainer)
+}
+
+function cleanLoadingFeedback() {
+    let loadingAnimationContainer = document.getElementById("loading-animation-container")
+    loadingAnimationContainer.remove()
+    let mangaInfoContainer = document.getElementById('manga-info')
+    mangaInfoContainer.style.display = 'flex'
+    let picturesCaroussel = document.getElementById('pictures-caroussel-container')
+    picturesCaroussel.style.display = 'block'
+    let recommendationsCaroussel = document.getElementById('recommendations-caroussel-container')
+    recommendationsCaroussel.style.display = 'block'
+}
+
 async function startMangaInfoPage() {
+    hideContentWhileLoading()
     setMangaInfo()
 }
 
-startMangaInfoPage()
+setTimeout(function() { startMangaInfoPage() }, 1);

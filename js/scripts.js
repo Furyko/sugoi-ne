@@ -1,4 +1,4 @@
-/* ANIME PAGE SECTION (Home page) */
+/* ANIME PAGE SECTION */
 const apiUrlAnime = 'https://api.jikan.moe/v4/anime?sfw=true'
 let currentPage
 let searchNameParam = ""

@@ -129,6 +129,7 @@ async function showCharacterActors(data) {
     })
     let carousselFirstChild = slidesContainer.firstChild
     carousselFirstChild.style.display = 'block'
+    cleanLoadingFeedback()
 }
 
 function changeSlide(n, slide) {
@@ -145,8 +146,45 @@ async function showSlides(n, slide) {
     slides[slideIndex-1].style.display = "block";
 }
 
+function hideContentWhileLoading() {
+    let animeInfoContainer = document.getElementById('character-info')
+    animeInfoContainer.style.display = 'none'
+    let animesCaroussel = document.getElementById('animes-caroussel-container')
+    animesCaroussel.style.display = 'none'
+    let mangasCaroussel = document.getElementById('mangas-caroussel-container')
+    mangasCaroussel.style.display = 'none'
+    let actorsCaroussel = document.getElementById('actors-caroussel-container')
+    actorsCaroussel.style.display = 'none'
+    displayLoadingFeedback()
+}
+
+function displayLoadingFeedback() {
+    let loadingAnimationContainer = document.createElement("div")
+    loadingAnimationContainer.setAttribute("class", "loading-animation-container")
+    loadingAnimationContainer.setAttribute("id", "loading-animation-container")
+    let loadingFeedback = document.createElement("div")
+    loadingFeedback.setAttribute("class", "loading-animation")
+    loadingAnimationContainer.appendChild(loadingFeedback)
+    let mainContainer = document.getElementById("main-container")
+    mainContainer.appendChild(loadingAnimationContainer)
+}
+
+function cleanLoadingFeedback() {
+    let loadingAnimationContainer = document.getElementById("loading-animation-container")
+    loadingAnimationContainer.remove()
+    let animeInfoContainer = document.getElementById('character-info')
+    animeInfoContainer.style.display = 'flex'
+    let animesCaroussel = document.getElementById('animes-caroussel-container')
+    animesCaroussel.style.display = 'block'
+    let mangasCaroussel = document.getElementById('mangas-caroussel-container')
+    mangasCaroussel.style.display = 'block'
+    let actorsCaroussel = document.getElementById('actors-caroussel-container')
+    actorsCaroussel.style.display = 'block'
+}
+
 async function startCharacterInfoPage() {
+    hideContentWhileLoading()
     setCharacterInfo()
 }
 
-startCharacterInfoPage()
+setTimeout(function() { startCharacterInfoPage() }, 1);
