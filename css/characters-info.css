@@ -142,7 +142,7 @@ body {
 
 /* Caroussel */
 .caroussel-container {
-    margin: 1.8rem;
+    margin-top: 1.8rem;
     border: 1px solid purple;
     max-width: 1000px;
     position: relative;
