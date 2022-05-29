@@ -73,6 +73,12 @@ async function setAnimeInfo() {
     for (licensor in animeInfo.data.licensors) {
         animeLicensors.innerHTML = animeLicensors.innerHTML + animeInfo.data.licensors[licensor].name + ', '
     }
+    if (animeInfo.data.trailer.embed_url) {
+        let iframeContainer = document.getElementById('iframe-container')
+        let iframe = document.createElement('iframe')
+        iframe.setAttribute('src', animeInfo.data.trailer.embed_url)
+        iframeContainer.appendChild(iframe)
+    }
     showAnimePictures()
     showAnimeRecommendations()
 }
@@ -122,7 +128,9 @@ async function showSlides(n, slide) {
     for (var i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-    slides[slideIndex-1].style.display = "block";
+    if (slides[slideIndex-1]) {
+        slides[slideIndex-1].style.display = "block";
+    }
 }
 
 function hideContentWhileLoading() {
