@@ -1,7 +1,7 @@
 .home-card-container {
     margin: 2.5rem;
     display: grid;
-    row-gap: 1rem;
+    row-gap: 1.5rem;
     border: 1px solid red;
 }
 
@@ -27,4 +27,28 @@
 .home-card img {
     height: 200px;
     width: 200px;
+}
+
+@media only screen and (min-width: 768px) {
+    .home-card-container {
+        justify-content: center;
+        margin: 2.5rem;
+        display: grid;
+        grid-template-columns: 18.5rem 18.5rem;
+        row-gap: 1.5rem;
+        column-gap: 1.5rem;
+        border: 1px solid gray;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .home-card-container {
+        justify-content: center;
+        margin: 2.5rem;
+        display: grid;
+        grid-template-columns: 18.5rem 18.5rem 18.5rem;
+        row-gap: 1.5rem;
+        column-gap: 1.5rem;
+        border: 1px solid gray;
+    }
 }
