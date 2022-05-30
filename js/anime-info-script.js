@@ -109,6 +109,12 @@ async function showAnimeRecommendations() {
         let slideImage = document.createElement('img')
         slideImage.setAttribute('src', item.entry.images.jpg.image_url)
         slideItem.appendChild(slideImage)
+        let animeName = document.createElement('span')
+        animeName.innerHTML = 'Título: ' + item.entry.title
+        let animeInfoContainer = document.createElement('div')
+        animeInfoContainer.setAttribute('class', 'slides-info')
+        animeInfoContainer.appendChild(animeName)
+        slideItem.appendChild(animeInfoContainer)
     })
     let carousselFirstChild = slidesContainer.firstChild
     carousselFirstChild.style.display = 'block'

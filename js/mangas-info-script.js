@@ -93,6 +93,12 @@ async function showMangaRecommendations() {
         let slideImage = document.createElement('img')
         slideImage.setAttribute('src', item.entry.images.jpg.image_url)
         slideItem.appendChild(slideImage)
+        let mangaName = document.createElement('span')
+        mangaName.innerHTML = 'Título: ' + item.entry.title
+        let mangaInfoContainer = document.createElement('div')
+        mangaInfoContainer.setAttribute('class', 'slides-info')
+        mangaInfoContainer.appendChild(mangaName)
+        slideItem.appendChild(mangaInfoContainer)
     })
     let carousselFirstChild = slidesContainer.firstChild
     carousselFirstChild.style.display = 'block'
