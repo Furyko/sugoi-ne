@@ -4,6 +4,10 @@
     row-gap: 1.5rem;
 }
 
+.home-card-container a {
+    text-decoration: none;
+}
+
 .welcome {
     padding: 1rem;
 }
