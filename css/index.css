@@ -48,3 +48,9 @@
         column-gap: 1.5rem;
     }
 }
+
+@media only screen and (min-width: 1280px) {
+    .home-card-container {
+        column-gap: 6rem;
+    }
+}
