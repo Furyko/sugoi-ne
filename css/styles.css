@@ -125,6 +125,7 @@ body {
 }
 
 .card-image img {
+    border: 1px solid gray;
     height: 16rem;
 }
 

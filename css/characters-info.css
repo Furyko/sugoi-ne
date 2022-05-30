@@ -70,10 +70,6 @@ body {
     align-items: center;
 }
 
-.card-image img {
-    border: 1px solid gray;
-}
-
 .character-info {
     display: flex;
     flex-direction: column;
@@ -231,10 +227,6 @@ body {
         align-items: center;
         margin: auto;
         margin-top: 0;
-    }
-
-    .card-image img {
-        border: 1px solid gray;
     }
     
     .character-info {
