@@ -213,6 +213,14 @@ body {
     overflow: hidden;
 }
 
+.card a {
+    text-decoration: none;
+}
+
+.card a:hover {
+    color: aqua;
+}
+
 .card-image {
     height: 16rem;
     overflow: hidden;
