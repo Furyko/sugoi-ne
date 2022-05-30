@@ -48,9 +48,10 @@ body {
 
 .caroussel-container span {
     font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.slides-pictures, .slides-recommendations , .slides-animes, .slides-mangas, .slides-actors {
+.slides-pictures, .slides-recommendations, .slides-animes, .slides-mangas, .slides-actors {
     text-align: center;
     display: none;
 }
@@ -58,6 +59,11 @@ body {
 .slides-pictures img, .slides-recommendations img {
     border: 1px solid gray;
     height: 350px;
+}
+
+.slides-info {
+    display: flex;
+    flex-direction: column;
 }
 
 .slide-image {
