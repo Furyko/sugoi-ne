@@ -220,7 +220,7 @@ body {
     
     .card-image {
         height: 16rem;
-        width: 55%;
+        width: 50%;
         overflow: hidden;
         display: flex;
         justify-content: center;
@@ -286,6 +286,12 @@ body {
         margin-left: 0;
         border-radius: 6px;
         padding: 0.3rem;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .card-image {
+        width: 30%;
     }
 }
 
