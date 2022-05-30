@@ -2,11 +2,9 @@
     margin: 2.5rem;
     display: grid;
     row-gap: 1.5rem;
-    border: 1px solid red;
 }
 
 .welcome {
-    border: 1px solid blue;
     padding: 1rem;
 }
 
@@ -37,7 +35,6 @@
         grid-template-columns: 18.5rem 18.5rem;
         row-gap: 1.5rem;
         column-gap: 1.5rem;
-        border: 1px solid gray;
     }
 }
 
@@ -49,6 +46,5 @@
         grid-template-columns: 18.5rem 18.5rem 18.5rem;
         row-gap: 1.5rem;
         column-gap: 1.5rem;
-        border: 1px solid gray;
     }
 }

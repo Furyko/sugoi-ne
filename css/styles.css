@@ -5,9 +5,6 @@ body {
 
 /* ELEMENTS */
 /*Loading animation*/
-.loading-animation-container {
-    border: 1px solid green;
-}
 
 .loading-animation {
     display: flex;
@@ -95,7 +92,6 @@ body {
     margin: 2rem;
     display: flex;
     justify-content: center;
-    border: 1px solid palevioletred;
 }
 
 .search-bar {
@@ -103,13 +99,11 @@ body {
 }
 
 .main-container {
-    border: 1px solid gray;
     margin: 2.6rem;
 }
 
 .cards-container {
     justify-content: center;
-    border: 1px solid red; 
     display: grid;
     grid-template-columns: repeat(6, 11rem);
     column-gap: 2.6rem;
@@ -119,13 +113,12 @@ body {
 .card {
     height: 18rem; 
     width: 11rem; 
-    border: 1px solid green; 
+    border: 1px solid gray; 
 }
 
 .card-image {
     height: 16rem;
     overflow: hidden;
-    border: 1px solid red;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -138,7 +131,7 @@ body {
 .card-title {
     height: 1.8rem;
     overflow: hidden;
-    border: 1px solid blue;
+    border: 1px solid gray;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
@@ -146,26 +139,22 @@ body {
 
 .list-navigation {
     padding: 2rem;
-    border: 1px solid green;
 }
 
 .previous-next-buttons-container {
     display: flex;
     justify-content: center;
     text-align: center;
-    border: 1px solid red;
 }
 
 .previous-next-buttons-container form {
     display: flex;
     flex-direction: column;
     text-align: center;
-    border: 1px solid blue;
 }
 
 .page-number-input {
     text-align: center;
-    border: 1px solid orange;
     width: 3rem;
 }
 
@@ -180,12 +169,10 @@ body {
 @media only screen and (max-width: 440px) {
     .main-container {
         display: block;
-        border: 1px solid red;
         margin: 1.3rem;
     }
 
     .cards-container {
-        border: 1px solid gray; 
         display: flex;
         flex-direction: column;
     }
@@ -194,7 +181,7 @@ body {
         height: 16rem;
         display: block;
         width: auto;
-        border: 1px solid green;
+        border: 1px solid gray;
     }
 
     .card a {
@@ -206,7 +193,6 @@ body {
         height: 16rem;
         width: 50%;
         overflow: hidden;
-        border: 1px solid blue;
         display:flex;
         justify-content: center;
         align-items: center;
@@ -220,7 +206,7 @@ body {
         height: 16rem;
         overflow: visible;
         width: 50%;
-        border: 1px solid blue;
+        border: 1px solid gray;
         font-size: 20px;
         font-weight: bold;
     }

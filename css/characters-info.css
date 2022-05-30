@@ -55,7 +55,6 @@ body {
 
 /* CHARACTER INFO CONTENT */
 .main-container {
-    border: 1px solid gray;
     margin: 2.6rem;
     display: flex;
     flex-direction: column;
@@ -66,10 +65,13 @@ body {
     height: 16rem;
     width: 55%;
     overflow: hidden;
-    border: 1px solid red;
     display:flex;
     justify-content: center;
     align-items: center;
+}
+
+.card-image img {
+    border: 1px solid gray;
 }
 
 .character-info {
@@ -143,7 +145,6 @@ body {
 /* Caroussel */
 .caroussel-container {
     margin-top: 1.8rem;
-    border: 1px solid purple;
     max-width: 1000px;
     position: relative;
     width: 100%;
@@ -154,13 +155,12 @@ body {
 }
 
 .slides-animes, .slides-mangas, .slides-actors {
-    border: 1px solid orange;
     text-align: center;
     display: none;
 }
 
 .slides-animes img, .slides-mangas img, .slides-actors img {
-    border: 1px solid red;
+    border: 1px solid gray;
     height: 350px;
 }
 
@@ -180,7 +180,6 @@ body {
     width: 8rem;
     min-width: 10rem;
     overflow: hidden;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,7 +216,6 @@ body {
 
 @media only screen and (min-width: 700px) {
     .main-container {
-        border: 1px solid blue;
         margin: 2.6rem;
         display: flex;
         flex-direction: column;
@@ -228,12 +226,15 @@ body {
         height: 16rem;
         width: 55%;
         overflow: hidden;
-        border: 1px solid red;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: auto;
         margin-top: 0;
+    }
+
+    .card-image img {
+        border: 1px solid gray;
     }
     
     .character-info {
