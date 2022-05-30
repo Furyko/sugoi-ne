@@ -94,7 +94,16 @@ body {
 
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
+}
+
+.next, .prev {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 2rem;
 }
 
 .prev:hover, .next:hover {
