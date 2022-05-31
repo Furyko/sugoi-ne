@@ -26,51 +26,48 @@
                     </div>
                 </div>
             </nav>
-            <main>
-                <div class="main-container" id="main-container">
-                    <div class="character-info" id="character-info">
-                        <div class="card-image">
-                            <img class="character-image" id="character-image"/>
+        </header>
+        <main>
+            <div class="main-container" id="main-container">
+                <div class="character-info" id="character-info">
+                    <div class="card-image">
+                        <img class="character-image" id="character-image"/>
+                    </div>
+                    <div class="character-info-container">
+                        <div class="character-name-container">
+                            <span class="character-name" id="character-name"></span>
                         </div>
-                        <div class="character-info-container">
-                            <div class="character-name-container">
-                                <span class="character-name" id="character-name"></span>
-                            </div>
-                            <span id="character-japanese-name"></span>
-                            <div class="character-nickname-list centered" id="character-nickname-list">
-                                <span>Apodos:</span>
-                                <ul></ul>
-                            </div>
-                            <div class="character-about centered" id="character-about"></div>
+                        <span id="character-japanese-name"></span>
+                        <div class="character-nickname-list centered" id="character-nickname-list">
+                            <span>Apodos:</span>
+                            <ul></ul>
                         </div>
-                    </div>
-
-                    <div class="caroussel-container" id="animes-caroussel-container">
-                        <span>Animes en los que apareció</span>
-                        <hr>
-                        <div class="slides-container" id="animes-slides-container"></div>
-                        <a class="prev" onclick="changeSlide(-1, 'animes')">❮</a>
-                        <a class="next" onclick="changeSlide(1, 'animes')">❯</a>
-                    </div>
-
-                    <div class="caroussel-container" id="mangas-caroussel-container">
-                        <span>Mangas en los que apareció</span>
-                        <hr>
-                        <div class="slides-container" id="mangas-slides-container"></div>
-                        <a class="prev" onclick="changeSlide(-1, 'mangas')">❮</a>
-                        <a class="next" onclick="changeSlide(1, 'mangas')">❯</a>
-                    </div>
-
-                    <div class="caroussel-container" id="actors-caroussel-container">
-                        <span>Actuación de voz</span>
-                        <hr>
-                        <div class="slides-container" id="actors-slides-container"></div>
-                        <a class="prev" onclick="changeSlide(-1, 'actors')">❮</a>
-                        <a class="next" onclick="changeSlide(1, 'actors')">❯</a>
+                        <div class="character-about centered" id="character-about"></div>
                     </div>
                 </div>
-            </main>
-        </header>
+                <div class="caroussel-container" id="animes-caroussel-container">
+                    <span>Animes en los que apareció</span>
+                    <hr>
+                    <div class="slides-container" id="animes-slides-container"></div>
+                    <a class="prev" onclick="changeSlide(-1, 'animes')">❮</a>
+                    <a class="next" onclick="changeSlide(1, 'animes')">❯</a>
+                </div>
+                <div class="caroussel-container" id="mangas-caroussel-container">
+                    <span>Mangas en los que apareció</span>
+                    <hr>
+                    <div class="slides-container" id="mangas-slides-container"></div>
+                    <a class="prev" onclick="changeSlide(-1, 'mangas')">❮</a>
+                    <a class="next" onclick="changeSlide(1, 'mangas')">❯</a>
+                </div>
+                <div class="caroussel-container" id="actors-caroussel-container">
+                    <span>Actuación de voz</span>
+                    <hr>
+                    <div class="slides-container" id="actors-slides-container"></div>
+                    <a class="prev" onclick="changeSlide(-1, 'actors')">❮</a>
+                    <a class="next" onclick="changeSlide(1, 'actors')">❯</a>
+                </div>
+            </div>
+        </main>
         <footer>
             <nav class='footer'>
                 <a href="https://julian-palavecino.netlify.app/" target="_blank" class="footer-text">Designed and developed by Julian Palavecino</a>

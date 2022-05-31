@@ -31,26 +31,26 @@
                 </div>
             </nav>
         </header>
-        <div class="search-bar-container">
-            <input type="text" class="search-bar" placeholder="Busca un manga por nombre" id="search-bar"/>
-            <button class="search-button" onclick="searchMangaByName()"><i class="fas fa-search"></i></button>
-        </div>
         <main>
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="Busca un manga por nombre" id="search-bar"/>
+                <button class="search-button" onclick="searchMangaByName()"><i class="fas fa-search"></i></button>
+            </div>
             <div class="main-container" id="main-container">
                 <div class="cards-container" id="cards-container"></div>
             </div>
-        </main>
-        <div class="list-navigation">
-            <div class="list-info-container" id="list-info-container"></div>
-            <div class="previous-next-buttons-container">
-                <button onclick="getPreviousMangaList()" id="previous-button">Anterior</button>
-                <form action="#">
-                    <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
-                    <input type="button" value="Ir" onclick="goToExactPage()"/>
-                </form>
-                <button onclick="getNextMangaList()" id="next-button">Siguiente</button>
+            <div class="list-navigation">
+                <div class="list-info-container" id="list-info-container"></div>
+                <div class="previous-next-buttons-container">
+                    <button onclick="getPreviousMangaList()" id="previous-button">Anterior</button>
+                    <form action="#">
+                        <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
+                        <input type="button" value="Ir" onclick="goToExactPage()"/>
+                    </form>
+                    <button onclick="getNextMangaList()" id="next-button">Siguiente</button>
+                </div>
             </div>
-        </div>
+        </main>
         <footer>
             <nav class='footer'>
                 <a href="https://julian-palavecino.netlify.app/" target="_blank" class="footer-text">Designed and developed by Julian Palavecino</a>

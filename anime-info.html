@@ -26,53 +26,53 @@
                     </div>
                 </div>
             </nav>
-            <main>
-                <div class="main-container" id="main-container">
-                    <div class="anime-info" id="anime-info">
-                        <div class="card-image">
-                            <img class="anime-image" id="anime-image"/>
-                        </div>
-                        <div class="anime-info-container">
-                            <div class="anime-title-and-rating">
-                                <span class="anime-title" id="anime-title"></span>
-                                <div class="button bg-orange rating" id="rating"></div>
-                            </div>
-                            <span id="anime-english-title"></span>
-                            <span id="anime-japanese-title"></span>
-                            <span id="anime-duration"></span>
-                            <div class="anime-type-airing display-flex centered">
-                                <div class="button bg-green" id="anime-type"></div>
-                                <div class="button bg-red" id="anime-status"></div>
-                            </div>
-                            <div class="anime-synopsis centered" id="anime-synopsis"></div>
-                            <div class="anime-genre display-flex centered" id="anime-genres"></div>
-                            <div class="anime-theme display-flex centered" id="anime-themes"></div>
-                            <span id="anime-studios">Estudios: </span>
-                            <span id="anime-producers">Productores: </span>
-                            <span id="anime-licensors">Licenciantes: </span>
-                        </div>
-                        <div class="iframe-container" id="iframe-container">
-                        </div>
+        </header>
+        <main>
+            <div class="main-container" id="main-container">
+                <div class="anime-info" id="anime-info">
+                    <div class="card-image">
+                        <img class="anime-image" id="anime-image"/>
                     </div>
-
-                    <div class="caroussel-container" id="pictures-caroussel-container">
-                        <span>Imágenes</span>
-                        <hr>
-                        <div class="slides-container" id="pictures-slides-container"></div>
-                        <a class="prev" onclick="changeSlide(-1, 'pictures')">❮</a>
-                        <a class="next" onclick="changeSlide(1, 'pictures')">❯</a>
+                    <div class="anime-info-container">
+                        <div class="anime-title-and-rating">
+                            <span class="anime-title" id="anime-title"></span>
+                            <div class="button bg-orange rating" id="rating"></div>
+                        </div>
+                        <span id="anime-english-title"></span>
+                        <span id="anime-japanese-title"></span>
+                        <span id="anime-duration"></span>
+                        <div class="anime-type-airing display-flex centered">
+                            <div class="button bg-green" id="anime-type"></div>
+                            <div class="button bg-red" id="anime-status"></div>
+                        </div>
+                        <div class="anime-synopsis centered" id="anime-synopsis"></div>
+                        <div class="anime-genre display-flex centered" id="anime-genres"></div>
+                        <div class="anime-theme display-flex centered" id="anime-themes"></div>
+                        <span id="anime-studios">Estudios: </span>
+                        <span id="anime-producers">Productores: </span>
+                        <span id="anime-licensors">Licenciantes: </span>
                     </div>
-
-                    <div class="caroussel-container" id="recommendations-caroussel-container">
-                        <span>Animes recomendados</span>
-                        <hr>
-                        <div class="slides-container" id="recommendations-slides-container"></div>
-                        <a class="prev" onclick="changeSlide(-1, 'recommendations')">❮</a>
-                        <a class="next" onclick="changeSlide(1, 'recommendations')">❯</a>
+                    <div class="iframe-container" id="iframe-container">
                     </div>
                 </div>
-            </main>
-        </header>
+
+                <div class="caroussel-container" id="pictures-caroussel-container">
+                    <span>Imágenes</span>
+                    <hr>
+                    <div class="slides-container" id="pictures-slides-container"></div>
+                    <a class="prev" onclick="changeSlide(-1, 'pictures')">❮</a>
+                    <a class="next" onclick="changeSlide(1, 'pictures')">❯</a>
+                </div>
+
+                <div class="caroussel-container" id="recommendations-caroussel-container">
+                    <span>Animes recomendados</span>
+                    <hr>
+                    <div class="slides-container" id="recommendations-slides-container"></div>
+                    <a class="prev" onclick="changeSlide(-1, 'recommendations')">❮</a>
+                    <a class="next" onclick="changeSlide(1, 'recommendations')">❯</a>
+                </div>
+            </div>
+        </main>
         <footer>
             <nav class='footer'>
                 <a href="https://julian-palavecino.netlify.app/" target="_blank" class="footer-text">Designed and developed by Julian Palavecino</a>
