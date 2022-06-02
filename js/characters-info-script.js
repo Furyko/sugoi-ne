@@ -21,7 +21,11 @@ async function getCharacterInfo(param) {
 async function setCharacterInfo() {
     const characterInfo = await getCharacterInfo()
     let characterImage = document.getElementById('character-image')
-    characterImage.setAttribute('src', characterInfo.data.images.jpg.image_url)
+    try {
+        characterImage.setAttribute('src', characterInfo.data.images.jpg.image_url)
+    } catch(e) {
+        console.error(e)
+    }
     let characterName = document.getElementById('character-name')
     characterName.innerHTML = characterInfo.data.name
     let japaneseName = document.getElementById('character-japanese-name')
@@ -128,7 +132,11 @@ async function showCharacterActors(data) {
         slideItem.appendChild(actorInfoContainer)
     })
     let carousselFirstChild = slidesContainer.firstChild
-    carousselFirstChild.style.display = 'block'
+    try {
+        carousselFirstChild.style.display = 'block'
+    } catch(e) {
+        console.error(e);
+    }
     cleanLoadingFeedback()
 }
 
