@@ -79,8 +79,25 @@ async function setAnimeInfo() {
         iframe.setAttribute('src', animeInfo.data.trailer.embed_url)
         iframeContainer.appendChild(iframe)
     }
+    addMusicList(animeInfo.data.theme.openings, 'Openings:')
+    addMusicList(animeInfo.data.theme.endings, 'Endings:')
     showAnimePictures()
     showAnimeRecommendations()
+}
+
+function addMusicList(list, listTitle) {
+    let animeInfoContainer = document.getElementById('anime-info-container')
+    let themesContainer = document.createElement('div')
+    themesContainer.setAttribute('class', 'margin-bottom-1')
+    animeInfoContainer.appendChild(themesContainer)
+    let theme = document.createElement('div')
+    themesContainer.innerHTML = '<b>' + listTitle + '</b>'
+    for (opening in list) {
+        let element = document.createElement('div')
+        element.innerHTML = list[opening]
+        theme.appendChild(element)
+    }
+    themesContainer.appendChild(theme)
 }
 
 async function showAnimePictures() {

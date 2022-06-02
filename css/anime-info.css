@@ -113,6 +113,10 @@ body {
     display: flex;
 }
 
+.margin-bottom-1 {
+    margin-bottom: 1rem;
+}
+
 /* Breakpoints */
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
