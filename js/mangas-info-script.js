@@ -101,7 +101,11 @@ async function showMangaRecommendations() {
         slideItem.appendChild(mangaInfoContainer)
     })
     let carousselFirstChild = slidesContainer.firstChild
-    carousselFirstChild.style.display = 'block'
+    try {
+        carousselFirstChild.style.display = 'block'
+    } catch(e) {
+        console.error(e);
+    }
     showSlides(slideIndex, 'pictures')
     showSlides(slideIndex, 'recommendations')
     cleanLoadingFeedback()
