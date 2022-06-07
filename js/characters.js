@@ -4,45 +4,71 @@ let currentPage
 let searchNameParam = ""
 
 async function getCharactersList(param, value) {
-    if (param) {
-        var res = await fetch(apiUrlCharacters + "&" + param + "=" + value + searchNameParam);
-    } else {
-        if (searchNameParam == "") {
-            var res = await fetch(apiUrlCharacters);
+    try {
+        if (param) {
+            var res = await fetch(apiUrlCharacters + "&" + param + "=" + value + searchNameParam);
         } else {
-            var res = await fetch(apiUrlCharacters + searchNameParam);
+            if (searchNameParam == "") {
+                var res = await fetch(apiUrlCharacters);
+            } else {
+                var res = await fetch(apiUrlCharacters + searchNameParam);
+            }
         }
+        const data = await res.json();
+        currentPage = data.pagination.current_page
+        return data;
+    } catch(e) {
+        return e
     }
-    const data = await res.json();
-    currentPage = data.pagination.current_page
-    return data;
 }
 
 async function showCharactersCards(data) {
-    const charactersListData = await data.data
-    charactersListData.map((item) => {
-        let card = document.createElement("div")
-        card.setAttribute("class", "card")
-        let cardAnchor = document.createElement("a")
-        cardAnchor.setAttribute("href", "characters-info.html?characters=" + item.mal_id)
-        card.appendChild(cardAnchor)
-        let cardImageContainer = document.createElement("div")
-        cardImageContainer.setAttribute("class", "card-image")
-        cardAnchor.appendChild(cardImageContainer)
-        let cardImage = document.createElement("img")
-        cardImage.setAttribute("src",item.images.jpg.image_url)
-        cardImage.setAttribute("alt",item.name)
-        cardImageContainer.appendChild(cardImage)
-        let cardName = document.createElement("div")
-        cardName.setAttribute("class", "card-title")
-        cardAnchor.appendChild(cardName)
-        let characterName = document.createElement("span")
-        characterName.innerHTML = item.name
-        cardName.appendChild(characterName)
-        let cardsContainer = document.getElementById("cards-container")
-        cardsContainer.appendChild(card)
-    })
-    showCharactersListInfo(await data)
+    try {
+        const charactersListData = await data.data
+        charactersListData.map((item) => {
+            let card = document.createElement("div")
+            card.setAttribute("class", "card")
+            let cardAnchor = document.createElement("a")
+            cardAnchor.setAttribute("href", "characters-info.html?characters=" + item.mal_id)
+            card.appendChild(cardAnchor)
+            let cardImageContainer = document.createElement("div")
+            cardImageContainer.setAttribute("class", "card-image")
+            cardAnchor.appendChild(cardImageContainer)
+            let cardImage = document.createElement("img")
+            cardImage.setAttribute("src",item.images.jpg.image_url)
+            cardImage.setAttribute("alt",item.name)
+            cardImageContainer.appendChild(cardImage)
+            let cardName = document.createElement("div")
+            cardName.setAttribute("class", "card-title")
+            cardAnchor.appendChild(cardName)
+            let characterName = document.createElement("span")
+            characterName.innerHTML = item.name
+            cardName.appendChild(characterName)
+            let cardsContainer = document.getElementById("cards-container")
+            cardsContainer.appendChild(card)
+        })
+        showCharactersListInfo(await data)
+    } catch(e) {
+        let mainContainer = document.getElementById('main-container')
+        let errorContainer = document.createElement('div')
+        let errorTitle = document.createElement('span')
+        let errorMessage = document.createElement('span')
+        let errorMessage2 = document.createElement('span')
+        let reloadButton = document.createElement('button')
+        errorTitle.innerHTML = "Uh Oh"
+        reloadButton.innerHTML = "Recargar"
+        errorMessage.innerHTML = data.message
+        errorMessage2.innerHTML = "Revisa tu conexión a internet y prueba otra vez, por favor."
+        errorContainer.setAttribute('class', 'center flex-column')
+        errorTitle.setAttribute('class', 'bold-text font-subtitle')
+        reloadButton.setAttribute('class', 'button')
+        reloadButton.setAttribute('onclick', 'reloadPage()')
+        errorContainer.appendChild(errorTitle)
+        errorContainer.appendChild(errorMessage)
+        errorContainer.appendChild(errorMessage2)
+        errorContainer.appendChild(reloadButton)
+        mainContainer.appendChild(errorContainer)
+    }
 }
 
 async function showCharactersListInfo(data) {
@@ -134,6 +160,10 @@ async function searchCharacterByName() {
     let data = await getCharactersList()
     showCharactersCards(await data)
     cleanLoadingFeedback()
+}
+
+function reloadPage() {
+    location.reload()
 }
 
 async function startCharactersPage() {
