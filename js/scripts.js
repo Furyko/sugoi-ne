@@ -4,44 +4,70 @@ let currentPage
 let searchNameParam = ""
 
 async function getAnimeList(param, value) {
-    if (param) {
-        var res = await fetch(apiUrlAnime + "&" + param + "=" + value + searchNameParam);
-    } else {
-        if (searchNameParam == "") {
-            var res = await fetch(apiUrlAnime);
+    try {
+        if (param) {
+            var res = await fetch(apiUrlAnime + "&" + param + "=" + value + searchNameParam);
         } else {
-            var res = await fetch(apiUrlAnime + searchNameParam);
+            if (searchNameParam == "") {
+                var res = await fetch(apiUrlAnime);
+            } else {
+                var res = await fetch(apiUrlAnime + searchNameParam);
+            }
         }
+        const data = await res.json();
+        currentPage = data.pagination.current_page
+        return data;
+    } catch(e) {
+        return e
     }
-    const data = await res.json();
-    currentPage = data.pagination.current_page
-    return data;
 }
 
 async function showAnimeCards(data) {
-    const animeListData = await data.data
-    animeListData.map((item) => {
-        let card = document.createElement("div")
-        card.setAttribute("class", "card")
-        let cardAnchor = document.createElement("a")
-        cardAnchor.setAttribute("href", "anime-info.html?anime=" + item.mal_id)
-        card.appendChild(cardAnchor)
-        let cardImageContainer = document.createElement("div")
-        cardImageContainer.setAttribute("class", "card-image")
-        cardAnchor.appendChild(cardImageContainer)
-        let cardImage = document.createElement("img")
-        cardImage.setAttribute("src",item.images.jpg.image_url)
-        cardImageContainer.appendChild(cardImage)
-        let cardTitle = document.createElement("div")
-        cardTitle.setAttribute("class", "card-title")
-        cardAnchor.appendChild(cardTitle)
-        let animeTitle = document.createElement("span")
-        animeTitle.innerHTML = item.title
-        cardTitle.appendChild(animeTitle)
-        let cardsContainer = document.getElementById("cards-container")
-        cardsContainer.appendChild(card)
-    })
-    showAnimeListInfo(await data)
+    try {
+        const animeListData = await data.data
+        animeListData.map((item) => {
+            let card = document.createElement("div")
+            card.setAttribute("class", "card")
+            let cardAnchor = document.createElement("a")
+            cardAnchor.setAttribute("href", "anime-info.html?anime=" + item.mal_id)
+            card.appendChild(cardAnchor)
+            let cardImageContainer = document.createElement("div")
+            cardImageContainer.setAttribute("class", "card-image")
+            cardAnchor.appendChild(cardImageContainer)
+            let cardImage = document.createElement("img")
+            cardImage.setAttribute("src",item.images.jpg.image_url)
+            cardImageContainer.appendChild(cardImage)
+            let cardTitle = document.createElement("div")
+            cardTitle.setAttribute("class", "card-title")
+            cardAnchor.appendChild(cardTitle)
+            let animeTitle = document.createElement("span")
+            animeTitle.innerHTML = item.title
+            cardTitle.appendChild(animeTitle)
+            let cardsContainer = document.getElementById("cards-container")
+            cardsContainer.appendChild(card)
+        })
+        showAnimeListInfo(await data)
+    } catch(e) {
+        let mainContainer = document.getElementById('main-container')
+        let errorContainer = document.createElement('div')
+        let errorTitle = document.createElement('span')
+        let errorMessage = document.createElement('span')
+        let errorMessage2 = document.createElement('span')
+        let reloadButton = document.createElement('button')
+        errorTitle.innerHTML = "Uh Oh"
+        reloadButton.innerHTML = "Recargar"
+        errorMessage.innerHTML = data.message
+        errorMessage2.innerHTML = "Revisa tu conexión a internet y prueba otra vez, por favor."
+        errorContainer.setAttribute('class', 'center flex-column')
+        errorTitle.setAttribute('class', 'bold-text font-subtitle')
+        reloadButton.setAttribute('class', 'button')
+        reloadButton.setAttribute('onclick', 'reloadPage()')
+        errorContainer.appendChild(errorTitle)
+        errorContainer.appendChild(errorMessage)
+        errorContainer.appendChild(errorMessage2)
+        errorContainer.appendChild(reloadButton)
+        mainContainer.appendChild(errorContainer)
+    }
 }
 
 async function showAnimeListInfo(data) {
@@ -133,6 +159,10 @@ async function searchAnimeByName() {
     let data = await getAnimeList()
     showAnimeCards(await data)
     cleanLoadingFeedback()
+}
+
+function reloadPage() {
+    location.reload()
 }
 
 async function startAnimePage() {

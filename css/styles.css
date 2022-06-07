@@ -167,6 +167,20 @@ body {
     color: white;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.font-subtitle {
+    font-size: 1.5rem;
+    margin: 0.5rem;
+}
+
 /* NAVBAR */
 .navbar {
     background-color: #1E1E1E;
