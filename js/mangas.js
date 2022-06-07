@@ -1,5 +1,5 @@
 /* MANGA PAGE SECTION */
-const apiUrlManga = 'https://api.jikan.moe/v4/manga?sfw=true&genres_exclude=12,26,28,49'
+const apiUrlManga = 'https://api.jikan.moe/v4/manga?sfw=true&genres_exclude=9,12,26,28,43,49'
 let currentPage
 let searchNameParam = ""
 

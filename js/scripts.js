@@ -1,5 +1,5 @@
 /* ANIME PAGE SECTION */
-const apiUrlAnime = 'https://api.jikan.moe/v4/anime?sfw=true'
+const apiUrlAnime = 'https://api.jikan.moe/v4/anime?sfw=true&genres_exclude=9,12,26,28,49'
 let currentPage
 let searchNameParam = ""
 
