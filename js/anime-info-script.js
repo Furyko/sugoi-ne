@@ -19,7 +19,6 @@ async function fetchData(param) {
 }
 
 function showInfo(data) {
-    console.log(data)
     const infoContainer = document.getElementById('anime-info')
 
     const cardImage = document.createElement('div')
@@ -149,6 +148,15 @@ function showInfo(data) {
     cardImage.appendChild(image)
     infoContainer.appendChild(cardImage)
     infoContainer.appendChild(info)
+
+    if (data.data.trailer.embed_url) {
+        const iframeContainer = document.createElement('div')
+        iframeContainer.setAttribute('class', 'iframe-container')
+        let iframe = document.createElement('iframe')
+        iframe.setAttribute('src', data.data.trailer.embed_url)
+        iframeContainer.appendChild(iframe)
+        infoContainer.appendChild(iframeContainer)
+    }
 
     if (data.data.theme.openings.length > 0) {
         addMusicList(data.data.theme.openings, 'Openings:', info)
@@ -306,32 +314,32 @@ function showRecommendations(data) {
 }
 
 function shiftLeft(boxClass, parentCardsContainer) {
-    const boxes = document.querySelectorAll("." + boxClass);
-    const tmpNode = boxes[0];
-    boxes[0].className = boxClass;
+    const boxes = document.querySelectorAll("." + boxClass)
+    const tmpNode = boxes[0]
+    boxes[0].className = boxClass
     setTimeout(function() {
         if (boxes.length > 5) {
-            tmpNode.classList.add("box--hide");
-            boxes[5].className = boxClass;
+            tmpNode.classList.add("box--hide")
+            boxes[5].className = boxClass
         }
-        document.querySelector(parentCardsContainer).appendChild(tmpNode);
-    }, 10);
+        document.querySelector(parentCardsContainer).appendChild(tmpNode)
+    }, 10)
 }
 
 function shiftRight(boxClass, parentCardsContainer) {
-    const boxes = document.querySelectorAll("." + boxClass);
-    boxes[4].className = boxClass;
+    const boxes = document.querySelectorAll("." + boxClass)
+    boxes[4].className = boxClass
     setTimeout(function() {
-        const noOfCards = boxes.length;
+        const noOfCards = boxes.length
         if (noOfCards > 4) {
-            boxes[4].className = boxClass + " box--hide";
+            boxes[4].className = boxClass + " box--hide"
         }
-        const tmpNode = boxes[noOfCards - 1];
-        tmpNode.classList.remove("box--hide");
-        boxes[noOfCards - 1].remove();
-        let parentObj = document.querySelector(parentCardsContainer);
-        parentObj.insertBefore(tmpNode, parentObj.firstChild);
-    }, 10);
+        const tmpNode = boxes[noOfCards - 1]
+        tmpNode.classList.remove("box--hide")
+        boxes[noOfCards - 1].remove()
+        let parentObj = document.querySelector(parentCardsContainer)
+        parentObj.insertBefore(tmpNode, parentObj.firstChild)
+    }, 10)
 }
 
 async function startPage() {
