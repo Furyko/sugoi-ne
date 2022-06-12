@@ -55,6 +55,7 @@ body {
     border: 1px solid black;
     border-radius: 2rem;
     padding: 1rem;
+    overflow: hidden;
 }
 
 .caroussel-container span {
@@ -270,7 +271,7 @@ body {
 
 .card-image {
     height: 16rem;
-    overflow: hidden;
+    overflow: inherit;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -282,7 +283,7 @@ body {
 }
 
 .card-title {
-    height: 1.8rem;
+    height: -webkit-fill-available;
     overflow: hidden;
     border: 1px solid gray;
     text-align: center;

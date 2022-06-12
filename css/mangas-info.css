@@ -109,6 +109,73 @@ body {
     display: flex;
 }
 
+
+.cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-wrapper ul {
+    padding: 0;
+}
+
+.recommendations-cards__container, .pictures-cards__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25rem;
+}
+
+.box-pictures, .box-recommendations {
+    width: 12rem;
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.box-pictures:nth-child(2n), .box-recommendations:nth-child(2n) {
+    transform: scale(0.85);
+    z-index: -1;
+}
+
+.box-pictures:nth-child(2), .box-recommendations:nth-child(2) {
+  left: 5%;
+}
+
+.box-pictures:nth-child(4), .box-recommendations:nth-child(4) {
+  left: -5%;
+}
+
+.box-pictures:nth-child(4n + 1), .box-recommendations:nth-child(4n + 1) {
+    transform: scale(0.75);
+    z-index: -2;
+}
+
+.box-pictures:nth-child(1), .box-recommendations:nth-child(1) {
+  left: 15%;
+}
+
+.box-pictures:nth-child(5), .box-recommendations:nth-child(5) {
+  left: -15%;
+}
+
+.card__text-content {
+    text-align: center;
+    width: 75%;
+}
+
+.card__title {
+    padding: 1rem;
+}
+
+.box--hide {
+    display: none;
+}
+
+
 /* Breakpoints */
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}

@@ -8,7 +8,7 @@ async function getParam() {
     return mangaId
 }
 
-async function getMangaInfo(param) {
+async function fetchData(param) {
     if (param) {
         var res = await fetch(baseUrl + await getParam() + param)
     } else {
@@ -18,150 +18,278 @@ async function getMangaInfo(param) {
     return await jsonResponse
 }
 
-async function setMangaInfo() {
-    const mangaInfo = await getMangaInfo()
-    let mangaImage = document.getElementById('manga-image')
-    mangaImage.setAttribute('src', mangaInfo.data.images.jpg.image_url)
-    let mangaTitle = document.getElementById('manga-title')
-    mangaTitle.innerHTML = mangaInfo.data.title
-    let englishTitle = document.getElementById('manga-english-title')
-    englishTitle.innerHTML = 'Título en inglés: ' + mangaInfo.data.title_english 
-    let japaneseTitle = document.getElementById('manga-japanese-title')
-    japaneseTitle.innerHTML = 'Título en japonés: ' + mangaInfo.data.title_japanese
-    let mangaDuration = document.getElementById('manga-duration')
-    let dateData = mangaInfo.data.published.prop
-    let from = dateData.from.day + '-' + dateData.from.month + '-' + dateData.from.year
-    let to = dateData.to.day + '-' + dateData.to.month + '-' + dateData.to.year
-    mangaDuration.innerHTML = 'Duración: ' + from + ' a ' + to
-    let mangaType = document.getElementById('manga-type')
-    mangaType.innerHTML = mangaInfo.data.type
-    let mangaStatus = document.getElementById('manga-status')
-    if (mangaInfo.data.publishing) {
-        mangaStatus.innerHTML = 'En publicación'
-        mangaStatus.setAttribute('class', 'button bg-green')
+function showInfo(data) {
+    const infoContainer = document.getElementById('manga-info')
+
+    const cardImage = document.createElement('div')
+    cardImage.setAttribute('class', 'card-image')
+
+    const image = document.createElement('img')
+    image.setAttribute('class', 'manga-image')
+    image.setAttribute('src', data.data.images.jpg.image_url)
+
+    const info = document.createElement('div')
+    info.setAttribute('class', 'manga-info-container')
+
+    const titleContainer = document.createElement('div')
+    titleContainer.setAttribute('class', 'manga-title-and-rating')
+
+    const title = document.createElement('span')
+    title.setAttribute('class', 'manga-title')
+    title.innerHTML = data.data.title
+
+    info.appendChild(titleContainer)
+    titleContainer.appendChild(title)
+
+    if (data.data.title_english) {
+        const englishTitle = document.createElement('span')
+        englishTitle.innerHTML = 'Título en inglés: ' + data.data.title_english
+        info.appendChild(englishTitle)
+    }
+
+    const japaneseTitle = document.createElement('span')
+    japaneseTitle.innerHTML = 'Título en japonés: ' + data.data.title_japanese
+
+    const duration = document.createElement('span')
+    const durationInfo = data.data.published.prop
+    const from = durationInfo.from.day + '-' + durationInfo.from.month + '-' + durationInfo.from.year
+    const to = durationInfo.to.day + '-' + durationInfo.to.month + '-' + durationInfo.to.year
+    duration.innerHTML = 'Duración: ' + from + ' a ' + to
+
+    const stateInfo = document.createElement('div')
+    stateInfo.setAttribute('class', 'manga-type-airing display-flex centered')
+
+    const type = document.createElement('div')
+    type.setAttribute('class', 'button bg-green')
+    type.innerHTML = data.data.type
+
+    const status = document.createElement('div')
+    if (data.data.publishing) {
+        status.setAttribute('class', 'button bg-green')
+        status.innerHTML = 'En publicación'
     } else {
-        mangaStatus.innerHTML = 'Finalizado'
-        mangaStatus.setAttribute('class', 'button bg-red')
+        status.setAttribute('class', 'button bg-red')
+        status.innerHTML = 'Finalizado'
     }
-    let mangaSynopsis = document.getElementById('manga-synopsis')
-    mangaSynopsis.innerHTML = '<b>Sinopsis: </b>' + mangaInfo.data.synopsis
-    let mangaGenres = document.getElementById('manga-genres')
-    for (genre in mangaInfo.data.genres) {
-        let genreElement = document.createElement('div')
-        genreElement.setAttribute('class', 'button bg-cyan')
-        genreElement.innerHTML = mangaInfo.data.genres[genre].name
-        mangaGenres.appendChild(genreElement)
+
+    const synopsis = document.createElement('div')
+    synopsis.setAttribute('class', 'manga-synopsis centered')
+    if (data.data.synopsis) {
+        synopsis.innerHTML = '<b>Sinopsis: </b>' + data.data.synopsis
+    } else {
+        synopsis.innerHTML = '<b>Sinopsis: </b>Desconocida'
     }
-    let mangaThemes = document.getElementById('manga-themes')
-    for (theme in mangaInfo.data.themes) {
-        let themeElement = document.createElement('div')
-        themeElement.setAttribute('class', 'button bg-blue')
-        themeElement.innerHTML = mangaInfo.data.themes[theme].name
-        mangaThemes.appendChild(themeElement)
+
+    const genreContainer = document.createElement('div')
+    genreContainer.setAttribute('class', 'manga-genre display-flex centered')
+    for (i in data.data.genres) {
+        let genre = document.createElement('div')
+        genre.setAttribute('class', 'button bg-cyan')
+        genre.innerHTML = data.data.genres[i].name
+        genreContainer.appendChild(genre)
     }
-    let mangaStudios = document.getElementById('manga-studios')
-    for (magazine in mangaInfo.data.serializations) {
-        mangaStudios.innerHTML = mangaStudios.innerHTML + mangaInfo.data.serializations[magazine].name + ', '
+
+    const themesContainer = document.createElement('div')
+    themesContainer.setAttribute('class', 'manga-theme display-flex centered')
+    for (i in data.data.themes) {
+        let theme = document.createElement('div')
+        theme.setAttribute('class', 'button bg-blue')
+        theme.innerHTML = data.data.themes[i].name
+        themesContainer.appendChild(theme)
     }
-    showMangaPictures()
-    showMangaRecommendations()
-}
 
-async function showMangaPictures() {
-    let mangaPictures = await getMangaInfo('/pictures')
-    let slidesContainer = document.getElementById('pictures-slides-container')
-    await mangaPictures.data.map((item) => {
-        let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides-pictures')
-        slidesContainer.appendChild(slideItem)
-        let slideImage = document.createElement('img')
-        slideImage.setAttribute('src', item.jpg.image_url)
-        slideItem.appendChild(slideImage)
-    })
-}
-
-async function showMangaRecommendations() {
-    let mangaRecommendations = await getMangaInfo('/recommendations')
-    let slidesContainer = document.getElementById('recommendations-slides-container')
-    await mangaRecommendations.data.map((item) => {
-        let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides-recommendations')
-        let anchor = document.createElement('a')
-        anchor.setAttribute('href', 'manga-info.html?manga=' + item.entry.mal_id)
-        anchor.appendChild(slideItem)
-        slidesContainer.appendChild(anchor)
-        let slideImage = document.createElement('img')
-        slideImage.setAttribute('src', item.entry.images.jpg.image_url)
-        slideItem.appendChild(slideImage)
-        let mangaName = document.createElement('span')
-        mangaName.innerHTML = 'Título: ' + item.entry.title
-        let mangaInfoContainer = document.createElement('div')
-        mangaInfoContainer.setAttribute('class', 'slides-info')
-        mangaInfoContainer.appendChild(mangaName)
-        slideItem.appendChild(mangaInfoContainer)
-    })
-    let carousselFirstChild = slidesContainer.firstChild
-    try {
-        carousselFirstChild.style.display = 'block'
-    } catch(e) {
-        console.error(e);
+    const serializations = document.createElement('div')
+    serializations.setAttribute('class', 'manga-theme display-flex centered')
+    serializations.innerHTML = 'Serializaciónes: '
+    if (data.data.serializations.length > 0) {
+        for (i in data.data.serializations) {
+            serializations.innerHTML = serializations.innerHTML + data.data.serializations[i].name + ', '
+        }
+    } else {
+        serializations.innerHTML = serializations.innerHTML + 'Desconocidas'
     }
-    showSlides(slideIndex, 'pictures')
-    showSlides(slideIndex, 'recommendations')
-    cleanLoadingFeedback()
+
+    info.appendChild(japaneseTitle)
+    info.appendChild(duration)
+    info.appendChild(stateInfo)
+    stateInfo.appendChild(type)
+    stateInfo.appendChild(status)
+    info.appendChild(synopsis)
+    info.appendChild(genreContainer)
+    info.appendChild(themesContainer)
+    info.appendChild(serializations)
+    cardImage.appendChild(image)
+    infoContainer.appendChild(cardImage)
+    infoContainer.appendChild(info)
 }
 
-function changeSlide(n, slide) {
-    showSlides(slideIndex += n, slide);
-}
+function showImages(data) {
+    const picturesCarousselContainer = document.getElementById('pictures-caroussel-container')
+    const carousselTitle = document.createElement('span')
+    carousselTitle.innerHTML = 'Imágenes'
 
-async function showSlides(n, slide) {
-    let slides = await document.getElementsByClassName('slides-' + slide)
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (var i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    const hr = document.createElement('hr')
+
+    const slidesContainer = document.createElement('div')
+    slidesContainer.setAttribute('class', 'slides-container')
+
+    const pictures = document.createElement('div')
+    pictures.setAttribute('class', 'slides-pictures')
+
+    const cardsWrapper = document.createElement('div')
+    cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    if (data.data.length > 0) {
+        const cardsContainer = document.createElement('ul')
+        cardsContainer.setAttribute('class', 'pictures-cards__container')
+
+        for (i in data.data) {
+            let box = document.createElement('li')
+            let image = document.createElement('img')
+            image.setAttribute('src', data.data[i].jpg.image_url)
+            if (i < 5) {
+                box.setAttribute('class', 'box-pictures')
+            } else {
+                box.setAttribute('class', 'box-pictures box--hide')
+            }
+
+            cardsContainer.appendChild(box)
+            box.appendChild(image)
+        }
+
+        const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        prevButton.setAttribute('onclick', 'shiftRight("box-pictures", ".pictures-cards__container")')
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        nextButton.setAttribute('onclick', 'shiftLeft("box-pictures", ".pictures-cards__container")')
+        nextButton.innerHTML = '❯'
+
+        picturesCarousselContainer.appendChild(prevButton)
+        picturesCarousselContainer.appendChild(nextButton)
+        cardsWrapper.appendChild(cardsContainer)
+    } else {
+        const messageContainer = document.createElement('span')
+        messageContainer.setAttribute('class', 'center')
+        messageContainer.innerHTML = 'No hay imágenes disponibles'
+        cardsWrapper.appendChild(messageContainer)
     }
-    if (slides[slideIndex-1]) {
-        slides[slideIndex-1].style.display = "block";
+
+    picturesCarousselContainer.appendChild(carousselTitle)
+    picturesCarousselContainer.appendChild(hr)
+    picturesCarousselContainer.appendChild(slidesContainer)
+    slidesContainer.appendChild(pictures)
+    slidesContainer.appendChild(cardsWrapper)
+}
+
+function showRecommendations(data) {
+    const recommendationsCarousselContainer = document.getElementById('recommendations-caroussel-container')
+    const carousselTitle = document.createElement('span')
+    carousselTitle.innerHTML = 'Mangas recomendados'
+
+    const hr = document.createElement('hr')
+
+    const slidesContainer = document.createElement('div')
+    slidesContainer.setAttribute('class', 'slides-container')
+
+    const pictures = document.createElement('div')
+    pictures.setAttribute('class', 'slides-pictures')
+
+    const cardsWrapper = document.createElement('div')
+    cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    if (data.data.length > 0) {
+        const cardsContainer = document.createElement('ul')
+        cardsContainer.setAttribute('class', 'recommendations-cards__container')
+
+        for (i in data.data) {
+            let box = document.createElement('li')
+            let anchor = document.createElement('a')
+            anchor.setAttribute('href', 'manga-info.html?manga=' + data.data[i].entry.mal_id)
+            let image = document.createElement('img')
+            image.setAttribute('src', data.data[i].entry.images.jpg.image_url)
+            let titleContainer = document.createElement('div')
+            titleContainer.setAttribute('class', 'slides-info')
+            let title = document.createElement('span')
+            title.setAttribute('class', 'center')
+            title.innerHTML = data.data[i].entry.title
+
+            if (i < 5) {
+                box.setAttribute('class', 'box-recommendations')
+            } else {
+                box.setAttribute('class', 'box-recommendations box--hide')
+            }
+
+            cardsContainer.appendChild(box)
+            box.appendChild(anchor)
+            anchor.appendChild(image)
+            anchor.appendChild(titleContainer)
+            titleContainer.appendChild(title)
+        }
+
+        const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        prevButton.setAttribute('onclick', 'shiftRight("box-recommendations", ".recommendations-cards__container")')
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        nextButton.setAttribute('onclick', 'shiftLeft("box-recommendations", ".recommendations-cards__container")')
+        nextButton.innerHTML = '❯'
+
+        recommendationsCarousselContainer.appendChild(prevButton)
+        recommendationsCarousselContainer.appendChild(nextButton)
+        cardsWrapper.appendChild(cardsContainer)
+    } else {
+        const messageContainer = document.createElement('span')
+        messageContainer.setAttribute('class', 'center')
+        messageContainer.innerHTML = 'No hay recomendaciones disponibles'
+        cardsWrapper.appendChild(messageContainer)
     }
+
+    recommendationsCarousselContainer.appendChild(carousselTitle)
+    recommendationsCarousselContainer.appendChild(hr)
+    recommendationsCarousselContainer.appendChild(slidesContainer)
+    slidesContainer.appendChild(pictures)
+    slidesContainer.appendChild(cardsWrapper)
 }
 
-function hideContentWhileLoading() {
-    let mangaInfoContainer = document.getElementById('manga-info')
-    mangaInfoContainer.style.display = 'none'
-    let picturesCaroussel = document.getElementById('pictures-caroussel-container')
-    picturesCaroussel.style.display = 'none'
-    let recommendationsCaroussel = document.getElementById('recommendations-caroussel-container')
-    recommendationsCaroussel.style.display = 'none'
-    displayLoadingFeedback()
+function shiftLeft(boxClass, parentCardsContainer) {
+    const boxes = document.querySelectorAll("." + boxClass);
+    const tmpNode = boxes[0];
+    boxes[0].className = boxClass;
+    setTimeout(function() {
+        if (boxes.length > 5) {
+            tmpNode.classList.add("box--hide");
+            boxes[5].className = boxClass;
+        }
+        document.querySelector(parentCardsContainer).appendChild(tmpNode);
+    }, 10);
 }
 
-function displayLoadingFeedback() {
-    let loadingAnimationContainer = document.createElement("div")
-    loadingAnimationContainer.setAttribute("class", "loading-animation-container")
-    loadingAnimationContainer.setAttribute("id", "loading-animation-container")
-    let loadingFeedback = document.createElement("div")
-    loadingFeedback.setAttribute("class", "loading-animation")
-    loadingAnimationContainer.appendChild(loadingFeedback)
-    let mainContainer = document.getElementById("main-container")
-    mainContainer.appendChild(loadingAnimationContainer)
+function shiftRight(boxClass, parentCardsContainer) {
+    const boxes = document.querySelectorAll("." + boxClass);
+    boxes[4].className = boxClass;
+    setTimeout(function() {
+        const noOfCards = boxes.length;
+        if (noOfCards > 4) {
+            boxes[4].className = boxClass + " box--hide";
+        }
+        const tmpNode = boxes[noOfCards - 1];
+        tmpNode.classList.remove("box--hide");
+        boxes[noOfCards - 1].remove();
+        let parentObj = document.querySelector(parentCardsContainer);
+        parentObj.insertBefore(tmpNode, parentObj.firstChild);
+    }, 10);
 }
 
-function cleanLoadingFeedback() {
-    let loadingAnimationContainer = document.getElementById("loading-animation-container")
-    loadingAnimationContainer.remove()
-    let mangaInfoContainer = document.getElementById('manga-info')
-    mangaInfoContainer.style.display = 'flex'
-    let picturesCaroussel = document.getElementById('pictures-caroussel-container')
-    picturesCaroussel.style.display = 'block'
-    let recommendationsCaroussel = document.getElementById('recommendations-caroussel-container')
-    recommendationsCaroussel.style.display = 'block'
+async function startPage() {
+    const data = await fetchData()
+    showInfo(await data)
+    showImages(await fetchData('/pictures'))
+    showRecommendations(await fetchData('/recommendations'))
 }
 
-async function startMangaInfoPage() {
-    hideContentWhileLoading()
-    setMangaInfo()
-}
-
-setTimeout(function() { startMangaInfoPage() }, 1);
+setTimeout(function() { startPage() }, 1);
