@@ -4,11 +4,11 @@ let slideIndex = 1;
 async function getParam() {
     const values = window.location.search
     const urlParams = new URLSearchParams(values)
-    const animeId = urlParams.get('anime')
-    return animeId
+    const mangaId = urlParams.get('anime')
+    return mangaId
 }
 
-async function getAnimeInfo(param) {
+async function fetchData(param) {
     if (param) {
         var res = await fetch(baseUrl + await getParam() + param)
     } else {
@@ -18,78 +18,150 @@ async function getAnimeInfo(param) {
     return await jsonResponse
 }
 
-async function setAnimeInfo() {
-    const animeInfo = await getAnimeInfo()
-    let animeImage = document.getElementById('anime-image')
-    animeImage.setAttribute('src', animeInfo.data.images.jpg.image_url)
-    let animeTitle = document.getElementById('anime-title')
-    animeTitle.innerHTML = animeInfo.data.title
-    let rating = document.getElementById('rating')
-    rating.innerHTML = animeInfo.data.rating
-    let englishTitle = document.getElementById('anime-english-title')
-    englishTitle.innerHTML = 'Título en inglés: ' + animeInfo.data.title_english 
-    let japaneseTitle = document.getElementById('anime-japanese-title')
-    japaneseTitle.innerHTML = 'Título en japonés: ' + animeInfo.data.title_japanese
-    let animeDuration = document.getElementById('anime-duration')
-    let dateData = animeInfo.data.aired.prop
-    let from = dateData.from.day + '-' + dateData.from.month + '-' + dateData.from.year
-    let to = dateData.to.day + '-' + dateData.to.month + '-' + dateData.to.year
-    animeDuration.innerHTML = 'Duración: ' + from + ' a ' + to
-    let animeType = document.getElementById('anime-type')
-    animeType.innerHTML = animeInfo.data.type
-    let animeStatus = document.getElementById('anime-status')
-    if (animeInfo.data.airing) {
-        animeStatus.innerHTML = 'En emisión'
-        animeStatus.setAttribute('class', 'button bg-green')
+function showInfo(data) {
+    console.log(data)
+    const infoContainer = document.getElementById('anime-info')
+
+    const cardImage = document.createElement('div')
+    cardImage.setAttribute('class', 'card-image')
+
+    const image = document.createElement('img')
+    image.setAttribute('class', 'anime-image')
+    image.setAttribute('src', data.data.images.jpg.image_url)
+
+    const info = document.createElement('div')
+    info.setAttribute('class', 'anime-info-container')
+
+    const titleContainer = document.createElement('div')
+    titleContainer.setAttribute('class', 'anime-title-and-rating')
+
+    const title = document.createElement('span')
+    title.setAttribute('class', 'anime-title')
+    title.innerHTML = data.data.title
+
+    const rating = document.createElement('div')
+    rating.setAttribute('class', 'button bg-orange rating')
+    rating.innerHTML = data.data.rating
+
+    info.appendChild(titleContainer)
+    titleContainer.appendChild(title)
+    titleContainer.appendChild(rating)
+
+    if (data.data.title_english) {
+        const englishTitle = document.createElement('span')
+        englishTitle.innerHTML = 'Título en inglés: ' + data.data.title_english
+        info.appendChild(englishTitle)
+    }
+
+    const japaneseTitle = document.createElement('span')
+    japaneseTitle.innerHTML = 'Título en japonés: ' + data.data.title_japanese
+
+    const duration = document.createElement('span')
+    const durationInfo = data.data.aired.prop
+    const from = durationInfo.from.day + '-' + durationInfo.from.month + '-' + durationInfo.from.year
+    const to = durationInfo.to.day + '-' + durationInfo.to.month + '-' + durationInfo.to.year
+    duration.innerHTML = 'Duración: ' + from + ' a ' + to
+
+    const stateInfo = document.createElement('div')
+    stateInfo.setAttribute('class', 'anime-type-airing display-flex centered')
+
+    const type = document.createElement('div')
+    type.setAttribute('class', 'button bg-green')
+    type.innerHTML = data.data.type
+
+    const status = document.createElement('div')
+    if (data.data.publishing) {
+        status.setAttribute('class', 'button bg-green')
+        status.innerHTML = 'En publicación'
     } else {
-        animeStatus.innerHTML = 'Finalizado'
-        animeStatus.setAttribute('class', 'button bg-red')
+        status.setAttribute('class', 'button bg-red')
+        status.innerHTML = 'Finalizado'
     }
-    let animeSynopsis = document.getElementById('anime-synopsis')
-    animeSynopsis.innerHTML = '<b>Sinopsis: </b>' + animeInfo.data.synopsis
-    let animeGenres = document.getElementById('anime-genres')
-    for (genre in animeInfo.data.genres) {
-        let genreElement = document.createElement('div')
-        genreElement.setAttribute('class', 'button bg-cyan')
-        genreElement.innerHTML = animeInfo.data.genres[genre].name
-        animeGenres.appendChild(genreElement)
+
+    const synopsis = document.createElement('div')
+    synopsis.setAttribute('class', 'anime-synopsis centered')
+    if (data.data.synopsis) {
+        synopsis.innerHTML = '<b>Sinopsis: </b>' + data.data.synopsis
+    } else {
+        synopsis.innerHTML = '<b>Sinopsis: </b>Desconocida'
     }
-    let animeThemes = document.getElementById('anime-themes')
-    for (theme in animeInfo.data.themes) {
-        let themeElement = document.createElement('div')
-        themeElement.setAttribute('class', 'button bg-blue')
-        themeElement.innerHTML = animeInfo.data.themes[theme].name
-        animeThemes.appendChild(themeElement)
+
+    const genreContainer = document.createElement('div')
+    genreContainer.setAttribute('class', 'anime-genre display-flex centered')
+    for (i in data.data.genres) {
+        let genre = document.createElement('div')
+        genre.setAttribute('class', 'button bg-cyan')
+        genre.innerHTML = data.data.genres[i].name
+        genreContainer.appendChild(genre)
     }
-    let animeStudios = document.getElementById('anime-studios')
-    for (studio in animeInfo.data.studios) {
-        animeStudios.innerHTML = animeStudios.innerHTML + animeInfo.data.studios[studio].name + ', '
+
+    const themesContainer = document.createElement('div')
+    themesContainer.setAttribute('class', 'anime-theme display-flex centered')
+    for (i in data.data.themes) {
+        let theme = document.createElement('div')
+        theme.setAttribute('class', 'button bg-blue')
+        theme.innerHTML = data.data.themes[i].name
+        themesContainer.appendChild(theme)
     }
-    let animeProducers = document.getElementById('anime-producers')
-    for (producer in animeInfo.data.producers) {
-        animeProducers.innerHTML = animeProducers.innerHTML + animeInfo.data.producers[producer].name + ', '
+
+    const animeStudios = document.createElement('div')
+    animeStudios.innerHTML = 'Estudios: '
+    if (data.data.studios.length > 0) {
+        for (studio in data.data.studios) {
+            animeStudios.innerHTML = animeStudios.innerHTML + data.data.studios[studio].name + ', '
+        }
+    } else {
+        animeStudios.innerHTML = animeStudios.innerHTML + 'Desconocidos'
     }
-    let animeLicensors = document.getElementById('anime-licensors')
-    for (licensor in animeInfo.data.licensors) {
-        animeLicensors.innerHTML = animeLicensors.innerHTML + animeInfo.data.licensors[licensor].name + ', '
+
+    const animeProducers = document.createElement('div')
+    animeProducers.innerHTML = 'Productores: '
+    if (data.data.producers.length > 0) {
+        for (producer in data.data.producers) {
+            animeProducers.innerHTML = animeProducers.innerHTML + data.data.producers[producer].name + ', '
+        }
+    } else {
+        animeProducers.innerHTML = animeProducers.innerHTML + 'Desconocidos'
     }
-    if (animeInfo.data.trailer.embed_url) {
-        let iframeContainer = document.getElementById('iframe-container')
-        let iframe = document.createElement('iframe')
-        iframe.setAttribute('src', animeInfo.data.trailer.embed_url)
-        iframeContainer.appendChild(iframe)
+
+    const animeLicensors = document.createElement('div')
+    animeLicensors.setAttribute('class', 'margin-bottom-1')
+    animeLicensors.innerHTML = 'Licenciantes: '
+    if (data.data.producers.length > 0) {
+        for (licensor in data.data.licensors) {
+            animeLicensors.innerHTML = animeLicensors.innerHTML + data.data.licensors[licensor].name + ', '
+        }
+    } else {
+        animeLicensors.innerHTML = animeLicensors.innerHTML + 'Desconocidos'
     }
-    addMusicList(animeInfo.data.theme.openings, 'Openings:')
-    addMusicList(animeInfo.data.theme.endings, 'Endings:')
-    showAnimePictures()
-    showAnimeRecommendations()
+
+    info.appendChild(japaneseTitle)
+    info.appendChild(duration)
+    info.appendChild(stateInfo)
+    stateInfo.appendChild(type)
+    stateInfo.appendChild(status)
+    info.appendChild(synopsis)
+    info.appendChild(genreContainer)
+    info.appendChild(themesContainer)
+    info.appendChild(animeStudios)
+    info.appendChild(animeProducers)
+    info.appendChild(animeLicensors)
+    cardImage.appendChild(image)
+    infoContainer.appendChild(cardImage)
+    infoContainer.appendChild(info)
+
+    if (data.data.theme.openings.length > 0) {
+        addMusicList(data.data.theme.openings, 'Openings:', info)
+    }
+    if (data.data.theme.endings.length > 0) {
+        addMusicList(data.data.theme.endings, 'Endings:', info)
+    }
 }
 
-function addMusicList(list, listTitle) {
-    let animeInfoContainer = document.getElementById('anime-info-container')
+function addMusicList(list, listTitle, father) {
     let themesContainer = document.createElement('div')
     themesContainer.setAttribute('class', 'margin-bottom-1')
-    animeInfoContainer.appendChild(themesContainer)
+    father.appendChild(themesContainer)
     let theme = document.createElement('div')
     themesContainer.innerHTML = '<b>' + listTitle + '</b>'
     for (opening in list) {
@@ -100,101 +172,173 @@ function addMusicList(list, listTitle) {
     themesContainer.appendChild(theme)
 }
 
-async function showAnimePictures() {
-    let animePictures = await getAnimeInfo('/pictures')
-    let slidesContainer = document.getElementById('pictures-slides-container')
-    await animePictures.data.map((item) => {
-        let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides-pictures')
-        slidesContainer.appendChild(slideItem)
-        let slideImage = document.createElement('img')
-        slideImage.setAttribute('src', item.jpg.image_url)
-        slideItem.appendChild(slideImage)
-    })
-}
+function showImages(data) {
+    const picturesCarousselContainer = document.getElementById('pictures-caroussel-container')
+    const carousselTitle = document.createElement('span')
+    carousselTitle.innerHTML = 'Imágenes'
 
-async function showAnimeRecommendations() {
-    let animeRecommendations = await getAnimeInfo('/recommendations')
-    let slidesContainer = document.getElementById('recommendations-slides-container')
-    await animeRecommendations.data.map((item) => {
-        let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides-recommendations')
-        let anchor = document.createElement('a')
-        anchor.setAttribute('href', 'anime-info.html?anime=' + item.entry.mal_id)
-        anchor.appendChild(slideItem)
-        slidesContainer.appendChild(anchor)
-        let slideImage = document.createElement('img')
-        slideImage.setAttribute('src', item.entry.images.jpg.image_url)
-        slideItem.appendChild(slideImage)
-        let animeName = document.createElement('span')
-        animeName.innerHTML = 'Título: ' + item.entry.title
-        let animeInfoContainer = document.createElement('div')
-        animeInfoContainer.setAttribute('class', 'slides-info')
-        animeInfoContainer.appendChild(animeName)
-        slideItem.appendChild(animeInfoContainer)
-    })
-    let carousselFirstChild = slidesContainer.firstChild
-    try {
-        carousselFirstChild.style.display = 'block'
-    } catch(e) {
-        console.error(e);
+    const hr = document.createElement('hr')
+
+    const slidesContainer = document.createElement('div')
+    slidesContainer.setAttribute('class', 'slides-container')
+
+    const pictures = document.createElement('div')
+    pictures.setAttribute('class', 'slides-pictures')
+
+    const cardsWrapper = document.createElement('div')
+    cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    if (data.data.length > 0) {
+        const cardsContainer = document.createElement('ul')
+        cardsContainer.setAttribute('class', 'pictures-cards__container')
+
+        for (i in data.data) {
+            let box = document.createElement('li')
+            let image = document.createElement('img')
+            image.setAttribute('src', data.data[i].jpg.image_url)
+            if (i < 5) {
+                box.setAttribute('class', 'box-pictures')
+            } else {
+                box.setAttribute('class', 'box-pictures box--hide')
+            }
+
+            cardsContainer.appendChild(box)
+            box.appendChild(image)
+        }
+
+        const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        prevButton.setAttribute('onclick', 'shiftRight("box-pictures", ".pictures-cards__container")')
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        nextButton.setAttribute('onclick', 'shiftLeft("box-pictures", ".pictures-cards__container")')
+        nextButton.innerHTML = '❯'
+
+        picturesCarousselContainer.appendChild(prevButton)
+        picturesCarousselContainer.appendChild(nextButton)
+        cardsWrapper.appendChild(cardsContainer)
+    } else {
+        const messageContainer = document.createElement('span')
+        messageContainer.setAttribute('class', 'center')
+        messageContainer.innerHTML = 'No hay imágenes disponibles'
+        cardsWrapper.appendChild(messageContainer)
     }
-    showSlides(slideIndex, 'pictures')
-    showSlides(slideIndex, 'recommendations')
-    cleanLoadingFeedback()
+
+    picturesCarousselContainer.appendChild(carousselTitle)
+    picturesCarousselContainer.appendChild(hr)
+    picturesCarousselContainer.appendChild(slidesContainer)
+    slidesContainer.appendChild(pictures)
+    slidesContainer.appendChild(cardsWrapper)
 }
 
-function changeSlide(n, slide) {
-    showSlides(slideIndex += n, slide);
-}
+function showRecommendations(data) {
+    const recommendationsCarousselContainer = document.getElementById('recommendations-caroussel-container')
+    const carousselTitle = document.createElement('span')
+    carousselTitle.innerHTML = 'Animes recomendados'
 
-async function showSlides(n, slide) {
-    let slides = await document.getElementsByClassName('slides-' + slide)
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (var i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    const hr = document.createElement('hr')
+
+    const slidesContainer = document.createElement('div')
+    slidesContainer.setAttribute('class', 'slides-container')
+
+    const pictures = document.createElement('div')
+    pictures.setAttribute('class', 'slides-pictures')
+
+    const cardsWrapper = document.createElement('div')
+    cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    if (data.data.length > 0) {
+        const cardsContainer = document.createElement('ul')
+        cardsContainer.setAttribute('class', 'recommendations-cards__container')
+
+        for (i in data.data) {
+            let box = document.createElement('li')
+            let anchor = document.createElement('a')
+            anchor.setAttribute('href', 'anime-info.html?anime=' + data.data[i].entry.mal_id)
+            let image = document.createElement('img')
+            image.setAttribute('src', data.data[i].entry.images.jpg.image_url)
+            let titleContainer = document.createElement('div')
+            titleContainer.setAttribute('class', 'slides-info')
+            let title = document.createElement('span')
+            title.setAttribute('class', 'center')
+            title.innerHTML = data.data[i].entry.title
+
+            if (i < 5) {
+                box.setAttribute('class', 'box-recommendations')
+            } else {
+                box.setAttribute('class', 'box-recommendations box--hide')
+            }
+
+            cardsContainer.appendChild(box)
+            box.appendChild(anchor)
+            anchor.appendChild(image)
+            anchor.appendChild(titleContainer)
+            titleContainer.appendChild(title)
+        }
+
+        const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        prevButton.setAttribute('onclick', 'shiftRight("box-recommendations", ".recommendations-cards__container")')
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        nextButton.setAttribute('onclick', 'shiftLeft("box-recommendations", ".recommendations-cards__container")')
+        nextButton.innerHTML = '❯'
+
+        recommendationsCarousselContainer.appendChild(prevButton)
+        recommendationsCarousselContainer.appendChild(nextButton)
+        cardsWrapper.appendChild(cardsContainer)
+    } else {
+        const messageContainer = document.createElement('span')
+        messageContainer.setAttribute('class', 'center')
+        messageContainer.innerHTML = 'No hay recomendaciones disponibles'
+        cardsWrapper.appendChild(messageContainer)
     }
-    if (slides[slideIndex-1]) {
-        slides[slideIndex-1].style.display = "block";
-    }
+
+    recommendationsCarousselContainer.appendChild(carousselTitle)
+    recommendationsCarousselContainer.appendChild(hr)
+    recommendationsCarousselContainer.appendChild(slidesContainer)
+    slidesContainer.appendChild(pictures)
+    slidesContainer.appendChild(cardsWrapper)
 }
 
-function hideContentWhileLoading() {
-    let animeInfoContainer = document.getElementById('anime-info')
-    animeInfoContainer.style.display = 'none'
-    let picturesCaroussel = document.getElementById('pictures-caroussel-container')
-    picturesCaroussel.style.display = 'none'
-    let recommendationsCaroussel = document.getElementById('recommendations-caroussel-container')
-    recommendationsCaroussel.style.display = 'none'
-    displayLoadingFeedback()
+function shiftLeft(boxClass, parentCardsContainer) {
+    const boxes = document.querySelectorAll("." + boxClass);
+    const tmpNode = boxes[0];
+    boxes[0].className = boxClass;
+    setTimeout(function() {
+        if (boxes.length > 5) {
+            tmpNode.classList.add("box--hide");
+            boxes[5].className = boxClass;
+        }
+        document.querySelector(parentCardsContainer).appendChild(tmpNode);
+    }, 10);
 }
 
-function displayLoadingFeedback() {
-    let loadingAnimationContainer = document.createElement("div")
-    loadingAnimationContainer.setAttribute("class", "loading-animation-container")
-    loadingAnimationContainer.setAttribute("id", "loading-animation-container")
-    let loadingFeedback = document.createElement("div")
-    loadingFeedback.setAttribute("class", "loading-animation")
-    loadingAnimationContainer.appendChild(loadingFeedback)
-    let mainContainer = document.getElementById("main-container")
-    mainContainer.appendChild(loadingAnimationContainer)
+function shiftRight(boxClass, parentCardsContainer) {
+    const boxes = document.querySelectorAll("." + boxClass);
+    boxes[4].className = boxClass;
+    setTimeout(function() {
+        const noOfCards = boxes.length;
+        if (noOfCards > 4) {
+            boxes[4].className = boxClass + " box--hide";
+        }
+        const tmpNode = boxes[noOfCards - 1];
+        tmpNode.classList.remove("box--hide");
+        boxes[noOfCards - 1].remove();
+        let parentObj = document.querySelector(parentCardsContainer);
+        parentObj.insertBefore(tmpNode, parentObj.firstChild);
+    }, 10);
 }
 
-function cleanLoadingFeedback() {
-    let loadingAnimationContainer = document.getElementById("loading-animation-container")
-    loadingAnimationContainer.remove()
-    let animeInfoContainer = document.getElementById('anime-info')
-    animeInfoContainer.style.display = 'flex'
-    let picturesCaroussel = document.getElementById('pictures-caroussel-container')
-    picturesCaroussel.style.display = 'block'
-    let recommendationsCaroussel = document.getElementById('recommendations-caroussel-container')
-    recommendationsCaroussel.style.display = 'block'
+async function startPage() {
+    const data = await fetchData()
+    showInfo(await data)
+    showImages(await fetchData('/pictures'))
+    showRecommendations(await fetchData('/recommendations'))
 }
 
-async function startAnimeInfoPage() {
-    hideContentWhileLoading()
-    setAnimeInfo()
-}
-
-setTimeout(function() { startAnimeInfoPage() }, 1);
+setTimeout(function() { startPage() }, 1);
