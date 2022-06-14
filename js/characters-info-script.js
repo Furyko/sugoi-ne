@@ -4,11 +4,11 @@ let slideIndex = 1;
 async function getParam() {
     const values = window.location.search
     const urlParams = new URLSearchParams(values)
-    const characterId = urlParams.get('characters')
-    return characterId
+    const mangaId = urlParams.get('characters')
+    return mangaId
 }
 
-async function getCharacterInfo(param) {
+async function fetchData(param) {
     if (param) {
         var res = await fetch(baseUrl + await getParam() + param)
     } else {
@@ -18,183 +18,306 @@ async function getCharacterInfo(param) {
     return await jsonResponse
 }
 
-async function setCharacterInfo() {
-    const characterInfo = await getCharacterInfo()
-    let characterImage = document.getElementById('character-image')
-    try {
-        characterImage.setAttribute('src', characterInfo.data.images.jpg.image_url)
-    } catch(e) {
-        console.error(e)
-    }
-    let characterName = document.getElementById('character-name')
-    characterName.innerHTML = characterInfo.data.name
-    let japaneseName = document.getElementById('character-japanese-name')
-    japaneseName.innerHTML = 'Kanji: ' + characterInfo.data.name_kanji
-    let nicknamesList = document.getElementById('character-nickname-list')
-    if (characterInfo.data.nicknames.length != 0) {
-        for (nickname in characterInfo.data.nicknames) {
-            let nicknameItem = document.createElement('li')
-            nicknameItem.innerHTML = characterInfo.data.nicknames[nickname]
-            nicknamesList.querySelector('ul').appendChild(nicknameItem)
+function showInfo(data) {
+    const infoContainer = document.getElementById('character-info')
+
+    const cardImage = document.createElement('div')
+    cardImage.setAttribute('class', 'card-image')
+
+    const image = document.createElement('img')
+    image.setAttribute('class', 'character-image')
+    image.setAttribute('src', data.data.images.jpg.image_url)
+
+    const info = document.createElement('div')
+    info.setAttribute('class', 'character-info-container')
+
+    const nameContainer = document.createElement('div')
+    nameContainer.setAttribute('class', 'character-name-container')
+
+    const name = document.createElement('span')
+    name.setAttribute('class', 'character-name')
+    name.innerHTML = data.data.name
+
+    const nameKanji = document.createElement('span')
+    nameKanji.innerHTML = 'Kanji: ' + data.data.name_kanji
+
+    const about = document.createElement('div')
+    about.setAttribute('class', 'character-about centered')
+    about.innerHTML = '<b>Sobre el personaje: </b>' + data.data.about
+
+    cardImage.appendChild(image)
+    infoContainer.appendChild(cardImage)
+    infoContainer.appendChild(info)
+    info.appendChild(nameContainer)
+    nameContainer.appendChild(name)
+    info.appendChild(nameKanji)
+    info.appendChild(about)
+}
+
+function showAnimes(data) {
+    const recommendationsCarousselContainer = document.getElementById('animes-caroussel-container')
+    const carousselTitle = document.createElement('span')
+    carousselTitle.innerHTML = 'Animes en los que aparece'
+
+    const hr = document.createElement('hr')
+
+    const slidesContainer = document.createElement('div')
+    slidesContainer.setAttribute('class', 'slides-container')
+
+    const pictures = document.createElement('div')
+    pictures.setAttribute('class', 'slides-pictures')
+
+    const cardsWrapper = document.createElement('div')
+    cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    if (data.data.length > 0) {
+        const cardsContainer = document.createElement('ul')
+        cardsContainer.setAttribute('class', 'recommendations-cards__container')
+
+        for (i in data.data) {
+            let box = document.createElement('li')
+            let anchor = document.createElement('a')
+            anchor.setAttribute('href', 'anime-info.html?anime=' + data.data[i].anime.mal_id)
+            let image = document.createElement('img')
+            image.setAttribute('src', data.data[i].anime.images.jpg.image_url)
+            let titleContainer = document.createElement('div')
+            titleContainer.setAttribute('class', 'slides-info')
+            let title = document.createElement('span')
+            title.setAttribute('class', 'center')
+            title.innerHTML = data.data[i].anime.title
+            let role = document.createElement('span')
+            role.setAttribute('class', 'center')
+            role.innerHTML = '(Rol: ' + data.data[i].role + ')'
+
+            if (i < 5) {
+                box.setAttribute('class', 'box-recommendations')
+            } else {
+                box.setAttribute('class', 'box-recommendations box--hide')
+            }
+
+            cardsContainer.appendChild(box)
+            box.appendChild(anchor)
+            anchor.appendChild(image)
+            anchor.appendChild(titleContainer)
+            titleContainer.appendChild(title)
+            titleContainer.appendChild(role)
         }
+
+        const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        prevButton.setAttribute('onclick', 'shiftRight("box-recommendations", ".recommendations-cards__container")')
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        nextButton.setAttribute('onclick', 'shiftLeft("box-recommendations", ".recommendations-cards__container")')
+        nextButton.innerHTML = '❯'
+
+        recommendationsCarousselContainer.appendChild(prevButton)
+        recommendationsCarousselContainer.appendChild(nextButton)
+        cardsWrapper.appendChild(cardsContainer)
     } else {
-        nicknamesList.remove()
+        const messageContainer = document.createElement('span')
+        messageContainer.setAttribute('class', 'center')
+        messageContainer.innerHTML = 'No hay animes disponibles'
+        cardsWrapper.appendChild(messageContainer)
     }
-    let characterAbout = document.getElementById('character-about')
-    characterAbout.innerHTML = '<b>Acerca de: </b>' + characterInfo.data.about
-    let characterGenres = document.getElementById('character-genres')
-    for (genre in characterInfo.data.genres) {
-        let genreElement = document.createElement('div')
-        genreElement.setAttribute('class', 'button bg-cyan')
-        genreElement.innerHTML = characterInfo.data.genres[genre].name
-        characterGenres.appendChild(genreElement)
+
+    recommendationsCarousselContainer.appendChild(carousselTitle)
+    recommendationsCarousselContainer.appendChild(hr)
+    recommendationsCarousselContainer.appendChild(slidesContainer)
+    slidesContainer.appendChild(pictures)
+    slidesContainer.appendChild(cardsWrapper)
+}
+
+function showMangas(data) {
+    const recommendationsCarousselContainer = document.getElementById('mangas-caroussel-container')
+    const carousselTitle = document.createElement('span')
+    carousselTitle.innerHTML = 'Mangas en los que aparece'
+
+    const hr = document.createElement('hr')
+
+    const slidesContainer = document.createElement('div')
+    slidesContainer.setAttribute('class', 'slides-container')
+
+    const pictures = document.createElement('div')
+    pictures.setAttribute('class', 'slides-pictures')
+
+    const cardsWrapper = document.createElement('div')
+    cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    if (data.data.length > 0) {
+        const cardsContainer = document.createElement('ul')
+        cardsContainer.setAttribute('class', 'mangas-cards__container')
+
+        for (i in data.data) {
+            let box = document.createElement('li')
+            let anchor = document.createElement('a')
+            anchor.setAttribute('href', 'manga-info.html?manga=' + data.data[i].manga.mal_id)
+            let image = document.createElement('img')
+            image.setAttribute('src', data.data[i].manga.images.jpg.image_url)
+            let titleContainer = document.createElement('div')
+            titleContainer.setAttribute('class', 'slides-info')
+            let title = document.createElement('span')
+            title.setAttribute('class', 'center')
+            title.innerHTML = data.data[i].manga.title
+            let role = document.createElement('span')
+            role.setAttribute('class', 'center')
+            role.innerHTML = '(Rol: ' + data.data[i].role + ')'
+
+            if (i < 5) {
+                box.setAttribute('class', 'box-2')
+            } else {
+                box.setAttribute('class', 'box-2 box--hide')
+            }
+
+            cardsContainer.appendChild(box)
+            box.appendChild(anchor)
+            anchor.appendChild(image)
+            anchor.appendChild(titleContainer)
+            titleContainer.appendChild(title)
+            titleContainer.appendChild(role)
+        }
+
+        const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        prevButton.setAttribute('onclick', 'shiftRight("box-2", ".mangas-cards__container")')
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        nextButton.setAttribute('onclick', 'shiftLeft("box-2", ".mangas-cards__container")')
+        nextButton.innerHTML = '❯'
+
+        recommendationsCarousselContainer.appendChild(prevButton)
+        recommendationsCarousselContainer.appendChild(nextButton)
+        cardsWrapper.appendChild(cardsContainer)
+    } else {
+        const messageContainer = document.createElement('span')
+        messageContainer.setAttribute('class', 'center')
+        messageContainer.innerHTML = 'No hay mangas disponibles'
+        cardsWrapper.appendChild(messageContainer)
     }
-    showCharacterAnimes(await characterInfo)
-    showCharacterMangas(await characterInfo)
-    showCharacterActors(await characterInfo)
-    showSlides(slideIndex, 'animes')
-    showSlides(slideIndex, 'mangas')
-    showSlides(slideIndex, 'actors')
+
+    recommendationsCarousselContainer.appendChild(carousselTitle)
+    recommendationsCarousselContainer.appendChild(hr)
+    recommendationsCarousselContainer.appendChild(slidesContainer)
+    slidesContainer.appendChild(pictures)
+    slidesContainer.appendChild(cardsWrapper)
 }
 
-async function showCharacterAnimes(data) {
-    let animeList = data.data.anime
-    let slidesContainer = document.getElementById('animes-slides-container')
-    await animeList.map((item) => {
-        let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides-animes')
-        let anchor = document.createElement('a')
-        anchor.setAttribute('href', 'anime-info.html?anime=' + item.anime.mal_id)
-        anchor.appendChild(slideItem)
-        slidesContainer.appendChild(anchor)
-        let slideImage = document.createElement('img')
-        slideImage.setAttribute('src', item.anime.images.jpg.image_url)
-        slideItem.appendChild(slideImage)
-        let animeName = document.createElement('span')
-        animeName.innerHTML = 'Título: ' + item.anime.title
-        let characterRole = document.createElement('span')
-        characterRole.innerHTML = 'Rol: ' + item.role
-        let animeInfoContainer = document.createElement('div')
-        animeInfoContainer.setAttribute('class', 'slides-info')
-        animeInfoContainer.appendChild(animeName)
-        animeInfoContainer.appendChild(characterRole)
-        slideItem.appendChild(animeInfoContainer)
-    })
-    let carousselFirstChild = slidesContainer.firstChild
-    carousselFirstChild.style.display = 'block'
+function showActors(data) {
+    const picturesCarousselContainer = document.getElementById('actors-caroussel-container')
+    const carousselTitle = document.createElement('span')
+    carousselTitle.innerHTML = 'Actuación de voz'
+
+    const hr = document.createElement('hr')
+
+    const slidesContainer = document.createElement('div')
+    slidesContainer.setAttribute('class', 'slides-container')
+
+    const pictures = document.createElement('div')
+    pictures.setAttribute('class', 'slides-pictures')
+
+    const cardsWrapper = document.createElement('div')
+    cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    if (data.data.length > 0) {
+        const cardsContainer = document.createElement('ul')
+        cardsContainer.setAttribute('class', 'pictures-cards__container')
+
+        for (i in data.data) {
+            let box = document.createElement('li')
+            let image = document.createElement('img')
+            image.setAttribute('src', data.data[i].person.images.jpg.image_url)
+            let nameContainer = document.createElement('div')
+            nameContainer.setAttribute('class', 'slides-info')
+            let name = document.createElement('span')
+            name.setAttribute('class', 'center')
+            name.innerHTML = data.data[i].person.name
+            let language = document.createElement('span')
+            language.setAttribute('class', 'center')
+            language.innerHTML = '(' + data.data[i].language + ')'
+
+            if (i < 5) {
+                box.setAttribute('class', 'box-pictures')
+            } else {
+                box.setAttribute('class', 'box-pictures box--hide')
+            }
+
+            cardsContainer.appendChild(box)
+            box.appendChild(image)
+            box.appendChild(nameContainer)
+            nameContainer.appendChild(name)
+            nameContainer.appendChild(language)
+        }
+
+        const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        prevButton.setAttribute('onclick', 'shiftRight("box-pictures", ".pictures-cards__container")')
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        nextButton.setAttribute('onclick', 'shiftLeft("box-pictures", ".pictures-cards__container")')
+        nextButton.innerHTML = '❯'
+
+        picturesCarousselContainer.appendChild(prevButton)
+        picturesCarousselContainer.appendChild(nextButton)
+        cardsWrapper.appendChild(cardsContainer)
+    } else {
+        const messageContainer = document.createElement('span')
+        messageContainer.setAttribute('class', 'center')
+        messageContainer.innerHTML = 'No hay imágenes disponibles'
+        cardsWrapper.appendChild(messageContainer)
+    }
+
+    picturesCarousselContainer.appendChild(carousselTitle)
+    picturesCarousselContainer.appendChild(hr)
+    picturesCarousselContainer.appendChild(slidesContainer)
+    slidesContainer.appendChild(pictures)
+    slidesContainer.appendChild(cardsWrapper)
 }
 
-async function showCharacterMangas(data) {
-    let characterRecommendations = data.data.manga
-    let slidesContainer = document.getElementById('mangas-slides-container')
-    await characterRecommendations.map((item) => {
-        let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides-mangas')
-        let anchor = document.createElement('a')
-        anchor.setAttribute('href', 'manga-info.html?manga=' + item.manga.mal_id)
-        anchor.appendChild(slideItem)
-        slidesContainer.appendChild(anchor)
-        let slideImage = document.createElement('img')
-        slideImage.setAttribute('src', item.manga.images.jpg.image_url)
-        slideItem.appendChild(slideImage)
-        let mangaName = document.createElement('span')
-        mangaName.innerHTML = 'Título: ' + item.manga.title
-        let characterRole = document.createElement('span')
-        characterRole.innerHTML = 'Rol: ' + item.role
-        let mangaInfoContainer = document.createElement('div')
-        mangaInfoContainer.setAttribute('class', 'slides-info')
-        mangaInfoContainer.appendChild(mangaName)
-        mangaInfoContainer.appendChild(characterRole)
-        slideItem.appendChild(mangaInfoContainer)
-    })
-    let carousselFirstChild = slidesContainer.firstChild
-    carousselFirstChild.style.display = 'block'
+function shiftLeft(boxClass, parentCardsContainer) {
+    const boxes = document.querySelectorAll("." + boxClass)
+    const tmpNode = boxes[0]
+    boxes[0].className = boxClass
+    setTimeout(function() {
+        if (boxes.length > 5) {
+            tmpNode.classList.add("box--hide")
+            boxes[5].className = boxClass
+        }
+        document.querySelector(parentCardsContainer).appendChild(tmpNode)
+    }, 10)
 }
 
-async function showCharacterActors(data) {
-    let actorsList = data.data.voices
-    let slidesContainer = document.getElementById('actors-slides-container')
-    await actorsList.map((item) => {
-        let slideItem = document.createElement('div')
-        slideItem.setAttribute('class', 'slides-actors')
-        slidesContainer.appendChild(slideItem)
-        let slideImage = document.createElement('img')
-        slideImage.setAttribute('src', item.person.images.jpg.image_url)
-        slideItem.appendChild(slideImage)
-        let actorName = document.createElement('span')
-        actorName.innerHTML = 'Nombre: ' +item.person.name
-        let actorLanguage = document.createElement('span')
-        actorLanguage.innerHTML = 'Lenguaje: ' +item.language
-        let actorInfoContainer = document.createElement('div')
-        actorInfoContainer.setAttribute('class', 'slides-info')
-        actorInfoContainer.appendChild(actorName)
-        actorInfoContainer.appendChild(actorLanguage)
-        slideItem.appendChild(actorInfoContainer)
-    })
-    let carousselFirstChild = slidesContainer.firstChild
+function shiftRight(boxClass, parentCardsContainer) {
+    const boxes = document.querySelectorAll("." + boxClass)
     try {
-        carousselFirstChild.style.display = 'block'
-    } catch(e) {
-        console.error(e);
+        boxes[4].className = boxClass
+    } catch {
+        boxes[boxes.length - 1].className = boxClass
     }
-    cleanLoadingFeedback()
+    setTimeout(function() {
+        const noOfCards = boxes.length
+        if (noOfCards > 4) {
+            boxes[4].className = boxClass + " box--hide"
+        }
+        const tmpNode = boxes[noOfCards - 1]
+        tmpNode.classList.remove("box--hide")
+        boxes[noOfCards - 1].remove()
+        let parentObj = document.querySelector(parentCardsContainer)
+        parentObj.insertBefore(tmpNode, parentObj.firstChild)
+    }, 10)
 }
 
-function changeSlide(n, slide) {
-    showSlides(slideIndex += n, slide);
+async function startPage() {
+    const data = await fetchData()
+    showInfo(await data)
+    showAnimes(await fetchData('/anime'))
+    showMangas(await fetchData('/manga'))
+    showActors(await fetchData('/voices'))
 }
 
-async function showSlides(n, slide) {
-    let slides = await document.getElementsByClassName('slides-' + slide)
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (var i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    if (slides[slideIndex-1]) {
-        slides[slideIndex-1].style.display = "block";
-    }
-}
-
-function hideContentWhileLoading() {
-    let animeInfoContainer = document.getElementById('character-info')
-    animeInfoContainer.style.display = 'none'
-    let animesCaroussel = document.getElementById('animes-caroussel-container')
-    animesCaroussel.style.display = 'none'
-    let mangasCaroussel = document.getElementById('mangas-caroussel-container')
-    mangasCaroussel.style.display = 'none'
-    let actorsCaroussel = document.getElementById('actors-caroussel-container')
-    actorsCaroussel.style.display = 'none'
-    displayLoadingFeedback()
-}
-
-function displayLoadingFeedback() {
-    let loadingAnimationContainer = document.createElement("div")
-    loadingAnimationContainer.setAttribute("class", "loading-animation-container")
-    loadingAnimationContainer.setAttribute("id", "loading-animation-container")
-    let loadingFeedback = document.createElement("div")
-    loadingFeedback.setAttribute("class", "loading-animation")
-    loadingAnimationContainer.appendChild(loadingFeedback)
-    let mainContainer = document.getElementById("main-container")
-    mainContainer.appendChild(loadingAnimationContainer)
-}
-
-function cleanLoadingFeedback() {
-    let loadingAnimationContainer = document.getElementById("loading-animation-container")
-    loadingAnimationContainer.remove()
-    let animeInfoContainer = document.getElementById('character-info')
-    animeInfoContainer.style.display = 'flex'
-    let animesCaroussel = document.getElementById('animes-caroussel-container')
-    animesCaroussel.style.display = 'block'
-    let mangasCaroussel = document.getElementById('mangas-caroussel-container')
-    mangasCaroussel.style.display = 'block'
-    let actorsCaroussel = document.getElementById('actors-caroussel-container')
-    actorsCaroussel.style.display = 'block'
-}
-
-async function startCharacterInfoPage() {
-    hideContentWhileLoading()
-    setCharacterInfo()
-}
-
-setTimeout(function() { startCharacterInfoPage() }, 1);
+setTimeout(function() { startPage() }, 1);
