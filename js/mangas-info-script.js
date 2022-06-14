@@ -271,7 +271,11 @@ function shiftLeft(boxClass, parentCardsContainer) {
 
 function shiftRight(boxClass, parentCardsContainer) {
     const boxes = document.querySelectorAll("." + boxClass);
-    boxes[4].className = boxClass;
+    try {
+        boxes[4].className = boxClass
+    } catch {
+        boxes[boxes.length - 1].className = boxClass
+    }
     setTimeout(function() {
         const noOfCards = boxes.length;
         if (noOfCards > 4) {
