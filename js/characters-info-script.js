@@ -70,6 +70,10 @@ function showAnimes(data) {
     const cardsWrapper = document.createElement('div')
     cardsWrapper.setAttribute('class', 'cards-wrapper')
 
+    recommendationsCarousselContainer.appendChild(carousselTitle)
+    recommendationsCarousselContainer.appendChild(hr)
+    recommendationsCarousselContainer.appendChild(slidesContainer)
+
     if (data.data.length > 0) {
         const cardsContainer = document.createElement('ul')
         cardsContainer.setAttribute('class', 'recommendations-cards__container')
@@ -123,9 +127,6 @@ function showAnimes(data) {
         cardsWrapper.appendChild(messageContainer)
     }
 
-    recommendationsCarousselContainer.appendChild(carousselTitle)
-    recommendationsCarousselContainer.appendChild(hr)
-    recommendationsCarousselContainer.appendChild(slidesContainer)
     slidesContainer.appendChild(pictures)
     slidesContainer.appendChild(cardsWrapper)
 }
@@ -145,6 +146,10 @@ function showMangas(data) {
 
     const cardsWrapper = document.createElement('div')
     cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    recommendationsCarousselContainer.appendChild(carousselTitle)
+    recommendationsCarousselContainer.appendChild(hr)
+    recommendationsCarousselContainer.appendChild(slidesContainer)
 
     if (data.data.length > 0) {
         const cardsContainer = document.createElement('ul')
@@ -199,9 +204,6 @@ function showMangas(data) {
         cardsWrapper.appendChild(messageContainer)
     }
 
-    recommendationsCarousselContainer.appendChild(carousselTitle)
-    recommendationsCarousselContainer.appendChild(hr)
-    recommendationsCarousselContainer.appendChild(slidesContainer)
     slidesContainer.appendChild(pictures)
     slidesContainer.appendChild(cardsWrapper)
 }
@@ -221,6 +223,10 @@ function showActors(data) {
 
     const cardsWrapper = document.createElement('div')
     cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    picturesCarousselContainer.appendChild(carousselTitle)
+    picturesCarousselContainer.appendChild(hr)
+    picturesCarousselContainer.appendChild(slidesContainer)
 
     if (data.data.length > 0) {
         const cardsContainer = document.createElement('ul')
@@ -272,9 +278,6 @@ function showActors(data) {
         cardsWrapper.appendChild(messageContainer)
     }
 
-    picturesCarousselContainer.appendChild(carousselTitle)
-    picturesCarousselContainer.appendChild(hr)
-    picturesCarousselContainer.appendChild(slidesContainer)
     slidesContainer.appendChild(pictures)
     slidesContainer.appendChild(cardsWrapper)
 }
