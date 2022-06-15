@@ -139,6 +139,10 @@ function showImages(data) {
     const cardsWrapper = document.createElement('div')
     cardsWrapper.setAttribute('class', 'cards-wrapper')
 
+    picturesCarousselContainer.appendChild(carousselTitle)
+    picturesCarousselContainer.appendChild(hr)
+    picturesCarousselContainer.appendChild(slidesContainer)
+
     if (data.data.length > 0) {
         const cardsContainer = document.createElement('ul')
         cardsContainer.setAttribute('class', 'pictures-cards__container')
@@ -177,9 +181,6 @@ function showImages(data) {
         cardsWrapper.appendChild(messageContainer)
     }
 
-    picturesCarousselContainer.appendChild(carousselTitle)
-    picturesCarousselContainer.appendChild(hr)
-    picturesCarousselContainer.appendChild(slidesContainer)
     slidesContainer.appendChild(pictures)
     slidesContainer.appendChild(cardsWrapper)
 }
@@ -199,6 +200,10 @@ function showRecommendations(data) {
 
     const cardsWrapper = document.createElement('div')
     cardsWrapper.setAttribute('class', 'cards-wrapper')
+
+    recommendationsCarousselContainer.appendChild(carousselTitle)
+    recommendationsCarousselContainer.appendChild(hr)
+    recommendationsCarousselContainer.appendChild(slidesContainer)
 
     if (data.data.length > 0) {
         const cardsContainer = document.createElement('ul')
@@ -249,9 +254,6 @@ function showRecommendations(data) {
         cardsWrapper.appendChild(messageContainer)
     }
 
-    recommendationsCarousselContainer.appendChild(carousselTitle)
-    recommendationsCarousselContainer.appendChild(hr)
-    recommendationsCarousselContainer.appendChild(slidesContainer)
     slidesContainer.appendChild(pictures)
     slidesContainer.appendChild(cardsWrapper)
 }
