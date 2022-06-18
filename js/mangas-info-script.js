@@ -18,6 +18,37 @@ async function fetchData(param) {
     return await jsonResponse
 }
 
+function excludeGenres(data) {
+    let excludedGenres = [9,12,26,28,49]
+    for (i in data.data.genres) {
+        if (excludedGenres.includes(data.data.genres[i].mal_id)) {
+            hidePage()
+        }
+    }
+}
+
+function hidePage() {
+    const mainContainer = document.getElementById('main-container')
+    while (mainContainer.firstChild) {
+        mainContainer.removeChild(mainContainer.firstChild)
+    }
+    let container = document.createElement('div')
+    let title = document.createElement('span')
+    let errorMessage = document.createElement('span')
+    let button = document.createElement('a')
+    title.innerHTML = "Uh Oh"
+    button.innerHTML = "Ir a la lista"
+    errorMessage.innerHTML = "Se ocultó el contenido de este manga porque podría tener contenido inapropiado."
+    container.setAttribute('class', 'center flex-column')
+    title.setAttribute('class', 'bold-text font-subtitle')
+    button.setAttribute('class', 'button bg-white')
+    button.setAttribute('href', 'mangas.html')
+    container.appendChild(title)
+    container.appendChild(errorMessage)
+    container.appendChild(button)
+    mainContainer.appendChild(container)
+}
+
 function showInfo(data) {
     const infoContainer = document.getElementById('manga-info')
 
@@ -305,6 +336,7 @@ function shiftRight(boxClass, parentCardsContainer) {
 
 async function startPage() {
     const data = await fetchData()
+    excludeGenres(await data)
     showInfo(await data)
     showImages(await fetchData('/pictures'))
     showRecommendations(await fetchData('/recommendations'))

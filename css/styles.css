@@ -145,6 +145,7 @@ body {
     margin: 0.3rem;
     border-radius: 6px;
     padding: 0.3rem;
+    text-decoration: none;
 }
 
 .bg-orange {
@@ -168,6 +169,11 @@ body {
 .bg-blue {
     background-color: blue;
     color: white;
+}
+
+.bg-white {
+    background-color: white;
+    color: black;
 }
 
 .flex-column {
