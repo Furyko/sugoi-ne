@@ -94,9 +94,15 @@ function showAnimes(data) {
             role.innerHTML = '(Rol: ' + data.data[i].role + ')'
 
             if (i < 5) {
-                box.setAttribute('class', 'box-recommendations')
+                if (data.data.length <= 1) {
+                    box.setAttribute('class', 'box-2-1-element')
+                } else if (data.data.length <= 2) {
+                    box.setAttribute('class', 'box-2-2-elements')
+                } else {
+                    box.setAttribute('class', 'box-2')
+                }
             } else {
-                box.setAttribute('class', 'box-recommendations box--hide')
+                box.setAttribute('class', 'box-2 box--hide')
             }
 
             cardsContainer.appendChild(box)
@@ -106,19 +112,7 @@ function showAnimes(data) {
             titleContainer.appendChild(title)
             titleContainer.appendChild(role)
         }
-
-        const prevButton = document.createElement('a')
-        prevButton.setAttribute('class', 'prev')
-        prevButton.setAttribute('onclick', 'shiftRight("box-recommendations", ".recommendations-cards__container")')
-        prevButton.innerHTML = '❮'
-
-        const nextButton = document.createElement('a')
-        nextButton.setAttribute('class', 'next')
-        nextButton.setAttribute('onclick', 'shiftLeft("box-recommendations", ".recommendations-cards__container")')
-        nextButton.innerHTML = '❯'
-
-        recommendationsCarousselContainer.appendChild(prevButton)
-        recommendationsCarousselContainer.appendChild(nextButton)
+        setNextAndPrevButtons(recommendationsCarousselContainer, data, 'box-2', '.recommendations-cards__container')
         cardsWrapper.appendChild(cardsContainer)
     } else {
         const messageContainer = document.createElement('span')
@@ -171,9 +165,15 @@ function showMangas(data) {
             role.innerHTML = '(Rol: ' + data.data[i].role + ')'
 
             if (i < 5) {
-                box.setAttribute('class', 'box-2')
+                if (data.data.length <= 1) {
+                    box.setAttribute('class', 'box-3-1-element')
+                } else if (data.data.length <= 2) {
+                    box.setAttribute('class', 'box-3-2-elements')
+                } else {
+                    box.setAttribute('class', 'box-3')
+                }
             } else {
-                box.setAttribute('class', 'box-2 box--hide')
+                box.setAttribute('class', 'box-3 box--hide')
             }
 
             cardsContainer.appendChild(box)
@@ -183,19 +183,7 @@ function showMangas(data) {
             titleContainer.appendChild(title)
             titleContainer.appendChild(role)
         }
-
-        const prevButton = document.createElement('a')
-        prevButton.setAttribute('class', 'prev')
-        prevButton.setAttribute('onclick', 'shiftRight("box-2", ".mangas-cards__container")')
-        prevButton.innerHTML = '❮'
-
-        const nextButton = document.createElement('a')
-        nextButton.setAttribute('class', 'next')
-        nextButton.setAttribute('onclick', 'shiftLeft("box-2", ".mangas-cards__container")')
-        nextButton.innerHTML = '❯'
-
-        recommendationsCarousselContainer.appendChild(prevButton)
-        recommendationsCarousselContainer.appendChild(nextButton)
+        setNextAndPrevButtons(recommendationsCarousselContainer, data, 'box-3', '.mangas-cards__container')
         cardsWrapper.appendChild(cardsContainer)
     } else {
         const messageContainer = document.createElement('span')
@@ -246,9 +234,15 @@ function showActors(data) {
             language.innerHTML = '(' + data.data[i].language + ')'
 
             if (i < 5) {
-                box.setAttribute('class', 'box-pictures')
+                if (data.data.length <= 1) {
+                    box.setAttribute('class', 'box-1-1-element')
+                } else if (data.data.length <= 2) {
+                    box.setAttribute('class', 'box-1-2-elements')
+                } else {
+                    box.setAttribute('class', 'box-1')
+                }
             } else {
-                box.setAttribute('class', 'box-pictures box--hide')
+                box.setAttribute('class', 'box-1 box--hide')
             }
 
             cardsContainer.appendChild(box)
@@ -257,19 +251,7 @@ function showActors(data) {
             nameContainer.appendChild(name)
             nameContainer.appendChild(language)
         }
-
-        const prevButton = document.createElement('a')
-        prevButton.setAttribute('class', 'prev')
-        prevButton.setAttribute('onclick', 'shiftRight("box-pictures", ".pictures-cards__container")')
-        prevButton.innerHTML = '❮'
-
-        const nextButton = document.createElement('a')
-        nextButton.setAttribute('class', 'next')
-        nextButton.setAttribute('onclick', 'shiftLeft("box-pictures", ".pictures-cards__container")')
-        nextButton.innerHTML = '❯'
-
-        picturesCarousselContainer.appendChild(prevButton)
-        picturesCarousselContainer.appendChild(nextButton)
+        setNextAndPrevButtons(picturesCarousselContainer, data, 'box-1', '.pictures-cards__container')
         cardsWrapper.appendChild(cardsContainer)
     } else {
         const messageContainer = document.createElement('span')
@@ -280,6 +262,29 @@ function showActors(data) {
 
     slidesContainer.appendChild(pictures)
     slidesContainer.appendChild(cardsWrapper)
+}
+
+function setNextAndPrevButtons(parent, data, className, container) {
+    const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        if (data.data.length <= 2) {
+            prevButton.setAttribute('onclick', `shiftRight("${className}-2-elements", "${container}")`)
+        } else {
+            prevButton.setAttribute('onclick', `shiftRight("${className}", "${container}")`)
+        }
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        if (data.data.length <= 2) {
+            nextButton.setAttribute('onclick', `shiftLeft("${className}-2-elements", "${container}")`)
+        } else {
+            nextButton.setAttribute('onclick', `shiftLeft("${className}", "${container}")`)
+        }
+        nextButton.innerHTML = '❯'
+
+        parent.appendChild(prevButton)
+        parent.appendChild(nextButton)
 }
 
 function shiftLeft(boxClass, parentCardsContainer) {

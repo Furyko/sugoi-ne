@@ -209,27 +209,21 @@ function showImages(data) {
             let image = document.createElement('img')
             image.setAttribute('src', data.data[i].jpg.image_url)
             if (i < 5) {
-                box.setAttribute('class', 'box-pictures')
+                if (data.data.length <= 1) {
+                    box.setAttribute('class', 'box-1-1-element')
+                } else if (data.data.length <= 2) {
+                    box.setAttribute('class', 'box-1-2-elements')
+                } else {
+                    box.setAttribute('class', 'box-1')
+                }
             } else {
-                box.setAttribute('class', 'box-pictures box--hide')
+                box.setAttribute('class', 'box-1 box--hide')
             }
 
             cardsContainer.appendChild(box)
             box.appendChild(image)
         }
-
-        const prevButton = document.createElement('a')
-        prevButton.setAttribute('class', 'prev')
-        prevButton.setAttribute('onclick', 'shiftRight("box-pictures", ".pictures-cards__container")')
-        prevButton.innerHTML = '❮'
-
-        const nextButton = document.createElement('a')
-        nextButton.setAttribute('class', 'next')
-        nextButton.setAttribute('onclick', 'shiftLeft("box-pictures", ".pictures-cards__container")')
-        nextButton.innerHTML = '❯'
-
-        picturesCarousselContainer.appendChild(prevButton)
-        picturesCarousselContainer.appendChild(nextButton)
+        setNextAndPrevButtons(picturesCarousselContainer, data, 'box-1', '.pictures-cards__container')
         cardsWrapper.appendChild(cardsContainer)
     } else {
         const messageContainer = document.createElement('span')
@@ -279,9 +273,15 @@ function showRecommendations(data) {
             title.innerHTML = data.data[i].entry.title
 
             if (i < 5) {
-                box.setAttribute('class', 'box-recommendations')
+                if (data.data.length <= 1) {
+                    box.setAttribute('class', 'box-2-1-element')
+                } else if (data.data.length <= 2) {
+                    box.setAttribute('class', 'box-2-2-elements')
+                } else {
+                    box.setAttribute('class', 'box-2')
+                }
             } else {
-                box.setAttribute('class', 'box-recommendations box--hide')
+                box.setAttribute('class', 'box-2 box--hide')
             }
 
             cardsContainer.appendChild(box)
@@ -290,19 +290,7 @@ function showRecommendations(data) {
             anchor.appendChild(titleContainer)
             titleContainer.appendChild(title)
         }
-
-        const prevButton = document.createElement('a')
-        prevButton.setAttribute('class', 'prev')
-        prevButton.setAttribute('onclick', 'shiftRight("box-recommendations", ".recommendations-cards__container")')
-        prevButton.innerHTML = '❮'
-
-        const nextButton = document.createElement('a')
-        nextButton.setAttribute('class', 'next')
-        nextButton.setAttribute('onclick', 'shiftLeft("box-recommendations", ".recommendations-cards__container")')
-        nextButton.innerHTML = '❯'
-
-        recommendationsCarousselContainer.appendChild(prevButton)
-        recommendationsCarousselContainer.appendChild(nextButton)
+        setNextAndPrevButtons(recommendationsCarousselContainer, data, 'box-2', '.recommendations-cards__container')
         cardsWrapper.appendChild(cardsContainer)
     } else {
         const messageContainer = document.createElement('span')
@@ -315,8 +303,31 @@ function showRecommendations(data) {
     slidesContainer.appendChild(cardsWrapper)
 }
 
+function setNextAndPrevButtons(parent, data, className, container) {
+    const prevButton = document.createElement('a')
+        prevButton.setAttribute('class', 'prev')
+        if (data.data.length <= 2) {
+            prevButton.setAttribute('onclick', `shiftRight("${className}-2-elements", "${container}")`)
+        } else {
+            prevButton.setAttribute('onclick', `shiftRight("${className}", "${container}")`)
+        }
+        prevButton.innerHTML = '❮'
+
+        const nextButton = document.createElement('a')
+        nextButton.setAttribute('class', 'next')
+        if (data.data.length <= 2) {
+            nextButton.setAttribute('onclick', `shiftLeft("${className}-2-elements", "${container}")`)
+        } else {
+            nextButton.setAttribute('onclick', `shiftLeft("${className}", "${container}")`)
+        }
+        nextButton.innerHTML = '❯'
+
+        parent.appendChild(prevButton)
+        parent.appendChild(nextButton)
+}
+
 function shiftLeft(boxClass, parentCardsContainer) {
-    const boxes = document.querySelectorAll("." + boxClass)
+    const boxes = document.querySelectorAll(parentCardsContainer + " ." + boxClass)
     const tmpNode = boxes[0]
     boxes[0].className = boxClass
     setTimeout(function() {
@@ -329,7 +340,7 @@ function shiftLeft(boxClass, parentCardsContainer) {
 }
 
 function shiftRight(boxClass, parentCardsContainer) {
-    const boxes = document.querySelectorAll("." + boxClass)
+    const boxes = document.querySelectorAll(parentCardsContainer + " ." + boxClass)
     try {
         boxes[4].className = boxClass
     } catch {
