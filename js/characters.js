@@ -185,12 +185,21 @@ function reloadPage() {
     location.reload()
 }
 
+function listenGoToForm() {
+    const form = document.getElementById('goto-form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        goToExactPage()
+    })
+}
+
 async function startCharactersPage() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
     showCharactersCards(await getCharactersList());
     cleanLoadingFeedback()
     disableNavigationButtons(false)
+    listenGoToForm()
 }
 
 setTimeout(function() { startCharactersPage() }, 1);
