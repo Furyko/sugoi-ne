@@ -270,11 +270,16 @@ main {
 }
 
 .card {
-    height: 18rem; 
+    height: 17.6rem; 
     width: 11rem; 
     border: 1px solid gray;
     border-radius: 1rem;
     overflow: hidden;
+    background-color: white;
+}
+
+.card:hover {
+    height: min-content;
 }
 
 .card a {
@@ -299,7 +304,7 @@ main {
 }
 
 .card-title {
-    height: -webkit-fill-available;
+    height: min-content;
     overflow: hidden;
     border: 1px solid gray;
     text-align: center;
