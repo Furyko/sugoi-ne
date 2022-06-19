@@ -184,12 +184,21 @@ function reloadPage() {
     location.reload()
 }
 
+function listenGoToForm() {
+    const form = document.getElementById('goto-form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        goToExactPage()
+    })
+}
+
 async function startAnimePage() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
     showAnimeCards(await getAnimeList());
     cleanLoadingFeedback()
     disableNavigationButtons(false)
+    listenGoToForm()
 }
 
 setTimeout(function() { startAnimePage() }, 1);
