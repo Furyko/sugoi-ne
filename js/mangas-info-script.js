@@ -27,6 +27,15 @@ function excludeGenres(data) {
     }
 }
 
+function updatePageTitle(data) {
+    const titleContainer = document.getElementById('page-title')
+    try {
+        titleContainer.innerHTML = 'Sugoi ne! - ' + data.data.title
+    } catch {
+        titleContainer.innerHTML = 'Sugoi ne! - Info de manga'
+    }
+}
+
 function hidePage() {
     const mainContainer = document.getElementById('main-container')
     while (mainContainer.firstChild) {
@@ -336,6 +345,7 @@ function shiftRight(boxClass, parentCardsContainer) {
 
 async function startPage() {
     const data = await fetchData()
+    updatePageTitle(await data)
     excludeGenres(await data)
     showInfo(await data)
     showImages(await fetchData('/pictures'))

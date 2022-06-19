@@ -18,6 +18,15 @@ async function fetchData(param) {
     return await jsonResponse
 }
 
+function updatePageTitle(data) {
+    const titleContainer = document.getElementById('page-title')
+    try {
+        titleContainer.innerHTML = 'Sugoi ne! - ' + data.data.name
+    } catch {
+        titleContainer.innerHTML = 'Sugoi ne! - Info de personaje'
+    }
+}
+
 function showInfo(data) {
     const infoContainer = document.getElementById('character-info')
 
@@ -322,6 +331,7 @@ function shiftRight(boxClass, parentCardsContainer) {
 
 async function startPage() {
     const data = await fetchData()
+    updatePageTitle(await data)
     showInfo(await data)
     showAnimes(await fetchData('/anime'))
     showMangas(await fetchData('/manga'))
