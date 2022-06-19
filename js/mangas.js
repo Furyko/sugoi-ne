@@ -193,6 +193,13 @@ function listenGoToForm() {
     })
 }
 
+function listenToSearchForm() {
+    const form = document.getElementById('search-form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+    })
+}
+
 async function startMangaPage() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
@@ -200,6 +207,7 @@ async function startMangaPage() {
     cleanLoadingFeedback()
     disableNavigationButtons(false)
     listenGoToForm()
+    listenToSearchForm()
 }
 
 setTimeout(function() { startMangaPage() }, 1);

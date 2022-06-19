@@ -38,10 +38,12 @@
         </header>
         <main>
             <div class="search-bar-container">
-                <input type="text" class="search-bar" placeholder="Busca un manga por nombre" id="search-bar"/>
-                <button class="search-button" onclick="searchMangaByName()">
-                    <i class="fas fa-search"></i>
-                </button>
+                <form id="search-form" action="#">
+                    <input type="text" class="search-bar" placeholder="Busca un manga por nombre" id="search-bar"/>
+                    <button class="search-button" onclick="searchMangaByName()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
             </div>
             <div class="main-container" id="main-container">
                 <div class="cards-container" id="cards-container"></div>

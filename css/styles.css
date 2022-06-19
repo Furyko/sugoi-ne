@@ -246,7 +246,7 @@ main {
 }
 
 /* HOME CONTENT */
-.search-bar-container {
+.search-bar-container form {
     height: 2.5rem;
     margin: 2rem;
     display: flex;

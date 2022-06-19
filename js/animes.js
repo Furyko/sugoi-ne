@@ -192,6 +192,13 @@ function listenGoToForm() {
     })
 }
 
+function listenToSearchForm() {
+    const form = document.getElementById('search-form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+    })
+}
+
 async function startAnimePage() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
@@ -199,6 +206,7 @@ async function startAnimePage() {
     cleanLoadingFeedback()
     disableNavigationButtons(false)
     listenGoToForm()
+    listenToSearchForm()
 }
 
 setTimeout(function() { startAnimePage() }, 1);
