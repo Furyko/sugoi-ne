@@ -108,6 +108,10 @@ function disableNavigationButtons(trueFalse) {
     valueInput.disabled = trueFalse
     const goToButton = document.getElementById('goto-page-input')
     goToButton.disabled = trueFalse
+    const searchBar = document.getElementById('search-bar')
+    searchBar.disabled = trueFalse
+    const searchButton = document.getElementById('search-button')
+    searchButton.disabled = trueFalse
 }
 
 function cleanCharactersList() {
