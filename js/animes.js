@@ -107,9 +107,6 @@ function disableNavigationButtons(trueFalse) {
     valueInput.disabled = trueFalse
     const goToButton = document.getElementById('goto-page-input')
     goToButton.disabled = trueFalse
-}
-
-function disableSearchButton(trueFalse) {
     const searchBar = document.getElementById('search-bar')
     searchBar.disabled = trueFalse
     const searchButton = document.getElementById('search-button')
@@ -130,40 +127,34 @@ function cleanAnimeList() {
 async function getNextAnimeList() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
-    disableSearchButton(true)
     cleanAnimeList()
     let nextPage = currentPage + 1
     const data = await getAnimeList("page", nextPage)
     showAnimeCards(await data)
     cleanLoadingFeedback()
     disableNavigationButtons(false)
-    disableSearchButton(false)
 }
 
 async function getPreviousAnimeList() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
-    disableSearchButton(true)
     cleanAnimeList()
     let previousPage = currentPage - 1
     const data = await getAnimeList("page", previousPage)
     showAnimeCards(await data)
     cleanLoadingFeedback()
     disableNavigationButtons(false)
-    disableSearchButton(false)
 }
 
 async function goToExactPage() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
-    disableSearchButton(true)
     let page = document.getElementById("page-value-input")
     cleanAnimeList()
     const data = await getAnimeList("page", page.value)
     showAnimeCards(await data)
     cleanLoadingFeedback()
     disableNavigationButtons(false)
-    disableSearchButton(false)
 }
 
 function updateGoToPageButtons(data) {
@@ -184,7 +175,6 @@ function updateGoToPageButtons(data) {
 async function searchAnimeByName() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
-    disableSearchButton(true)
     cleanAnimeList()
     let searchValue = document.getElementById("search-bar")
     searchNameParam = "&q=" + searchValue.value
@@ -192,7 +182,6 @@ async function searchAnimeByName() {
     showAnimeCards(await data)
     cleanLoadingFeedback()
     disableNavigationButtons(false)
-    disableSearchButton(false)
 }
 
 function reloadPage() {
@@ -217,11 +206,9 @@ function listenToSearchForm() {
 async function startAnimePage() {
     displayLoadingFeedback()
     disableNavigationButtons(true)
-    disableSearchButton(true)
     showAnimeCards(await getAnimeList());
     cleanLoadingFeedback()
     disableNavigationButtons(false)
-    disableSearchButton(false)
     listenGoToForm()
     listenToSearchForm()
 }
