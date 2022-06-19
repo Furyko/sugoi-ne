@@ -99,6 +99,17 @@ function cleanLoadingFeedback() {
     loadingAnimationContainer.remove()
 }
 
+function disableNavigationButtons(trueFalse) {
+    const prevListButton = document.getElementById('previous-button')
+    prevListButton.disabled = trueFalse
+    const nextListButton = document.getElementById('next-button')
+    nextListButton.disabled = trueFalse
+    const valueInput = document.getElementById('page-value-input')
+    valueInput.disabled = trueFalse
+    const goToButton = document.getElementById('goto-page-input')
+    goToButton.disabled = trueFalse
+}
+
 function cleanMangaList() {
     let cards = document.getElementById("cards-container")
     while (cards.firstChild) {
@@ -112,29 +123,35 @@ function cleanMangaList() {
 
 async function getNextMangaList() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanMangaList()
     let nextPage = currentPage + 1
     const data = await getMangaList("page", nextPage)
     showMangaCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 async function getPreviousMangaList() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanMangaList()
     let previousPage = currentPage - 1
     const data = await getMangaList("page", previousPage)
     showMangaCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 async function goToExactPage() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     let page = document.getElementById("page-value-input")
     cleanMangaList()
     const data = await getMangaList("page", page.value)
     showMangaCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 function updateGoToPageButtons(data) {
@@ -154,12 +171,14 @@ function updateGoToPageButtons(data) {
 
 async function searchMangaByName() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanMangaList()
     let searchValue = document.getElementById("search-bar")
     searchNameParam = "&q=" + searchValue.value
     let data = await getMangaList()
     showMangaCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 function reloadPage() {
@@ -168,8 +187,10 @@ function reloadPage() {
 
 async function startMangaPage() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     showMangaCards(await getMangaList());
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 setTimeout(function() { startMangaPage() }, 1);

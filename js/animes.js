@@ -98,6 +98,17 @@ function cleanLoadingFeedback() {
     loadingAnimationContainer.remove()
 }
 
+function disableNavigationButtons(trueFalse) {
+    const prevListButton = document.getElementById('previous-button')
+    prevListButton.disabled = trueFalse
+    const nextListButton = document.getElementById('next-button')
+    nextListButton.disabled = trueFalse
+    const valueInput = document.getElementById('page-value-input')
+    valueInput.disabled = trueFalse
+    const goToButton = document.getElementById('goto-page-input')
+    goToButton.disabled = trueFalse
+}
+
 function cleanAnimeList() {
     let cards = document.getElementById("cards-container")
     while (cards.firstChild) {
@@ -111,29 +122,35 @@ function cleanAnimeList() {
 
 async function getNextAnimeList() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanAnimeList()
     let nextPage = currentPage + 1
     const data = await getAnimeList("page", nextPage)
     showAnimeCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 async function getPreviousAnimeList() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanAnimeList()
     let previousPage = currentPage - 1
     const data = await getAnimeList("page", previousPage)
     showAnimeCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 async function goToExactPage() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     let page = document.getElementById("page-value-input")
     cleanAnimeList()
     const data = await getAnimeList("page", page.value)
     showAnimeCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 function updateGoToPageButtons(data) {
@@ -153,12 +170,14 @@ function updateGoToPageButtons(data) {
 
 async function searchAnimeByName() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanAnimeList()
     let searchValue = document.getElementById("search-bar")
     searchNameParam = "&q=" + searchValue.value
     let data = await getAnimeList()
     showAnimeCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 function reloadPage() {
@@ -167,8 +186,10 @@ function reloadPage() {
 
 async function startAnimePage() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     showAnimeCards(await getAnimeList());
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 setTimeout(function() { startAnimePage() }, 1);

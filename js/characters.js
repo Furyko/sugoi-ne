@@ -99,6 +99,17 @@ function cleanLoadingFeedback() {
     loadingAnimationContainer.remove()
 }
 
+function disableNavigationButtons(trueFalse) {
+    const prevListButton = document.getElementById('previous-button')
+    prevListButton.disabled = trueFalse
+    const nextListButton = document.getElementById('next-button')
+    nextListButton.disabled = trueFalse
+    const valueInput = document.getElementById('page-value-input')
+    valueInput.disabled = trueFalse
+    const goToButton = document.getElementById('goto-page-input')
+    goToButton.disabled = trueFalse
+}
+
 function cleanCharactersList() {
     let cards = document.getElementById("cards-container")
     while (cards.firstChild) {
@@ -112,29 +123,35 @@ function cleanCharactersList() {
 
 async function getNextCharactersList() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanCharactersList()
     let nextPage = currentPage + 1
     const data = await getCharactersList("page", nextPage)
     showCharactersCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 async function getPreviousCharactersList() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanCharactersList()
     let previousPage = currentPage - 1
     const data = await getCharactersList("page", previousPage)
     showCharactersCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 async function goToExactPage() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     let page = document.getElementById("page-value-input")
     cleanCharactersList()
     const data = await getCharactersList("page", page.value)
     showCharactersCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 function updateGoToPageButtons(data) {
@@ -154,12 +171,14 @@ function updateGoToPageButtons(data) {
 
 async function searchCharacterByName() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     cleanCharactersList()
     let searchValue = document.getElementById("search-bar")
     searchNameParam = "&q=" + searchValue.value
     let data = await getCharactersList()
     showCharactersCards(await data)
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 function reloadPage() {
@@ -168,8 +187,10 @@ function reloadPage() {
 
 async function startCharactersPage() {
     displayLoadingFeedback()
+    disableNavigationButtons(true)
     showCharactersCards(await getCharactersList());
     cleanLoadingFeedback()
+    disableNavigationButtons(false)
 }
 
 setTimeout(function() { startCharactersPage() }, 1);
