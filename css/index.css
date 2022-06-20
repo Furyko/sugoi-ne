@@ -18,6 +18,10 @@
 
 .home-card {
     overflow: hidden;
+    height: 17.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .home-card span {
