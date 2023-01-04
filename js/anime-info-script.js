@@ -19,7 +19,7 @@ async function fetchData(param) {
 }
 
 function excludeGenres(data) {
-    let excludedGenres = [9,12,26,28,49]
+    let excludedGenres = [9,12,14,26,28,49,58,65,81]
     for (i in data.data.genres) {
         if (excludedGenres.includes(data.data.genres[i].mal_id)) {
             hidePage()
