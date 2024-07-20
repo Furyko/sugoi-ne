@@ -1,6 +1,23 @@
+:root {
+    --color-1: #12086F;
+    --color-2: #2B35AF;
+    --color-3: #4361EE;
+    --color-4: #4895EF;
+    --color-5: #4CC9F0;
+    --color-6: #F0F0F0;
+    --color-7: #FFFFFF;
+    --color-8: #000000;
+    --color-primary: var(--color-4);
+    --color-secondary: var(--color-5);
+    --color-background: var(--color-6);
+    --color-background-2: var(--color-7);
+    --color-font: var(--color-8);
+    --color-font-secondary: var(--color-7);
+}
+
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #F0F0F0;
+    background-color: var(--color-background);
 }
 
 html, body {
@@ -10,6 +27,7 @@ html, body {
 
 main {
     min-height: 100%;
+    padding: 1.5rem;
 }
 
 /* ELEMENTS */
@@ -38,20 +56,26 @@ main {
         transform: rotate(360deg);
     }
 }
+
 /*Card*/
 .card-element {
-    border: 1px solid #999999;
-    background-color: cyan;
-    border-radius: 2rem;
+    background-color: var(--color-primary);
+    border-radius: 3rem;
     padding: 1rem;
+
+    transition-duration: 0.3s;
+    transition-property: scale, box-shadow;
+    transition-timing-function: ease-out;
 }
 
 .card-element:hover {
-    background-color: #75ffff;
+    background-color: var(--color-secondary);
+    scale: 1.1;
+    box-shadow: 0 0 20px 0 #808080;
 }
 
 .card-element span {
-    color: black;
+    color: var(--color-font-secondary);
 }
 
 /* Caroussel */
@@ -200,9 +224,9 @@ main {
 
 /* NAVBAR */
 .navbar {
-    background-color: #1E1E1E;
-    border: 1px solid #1E1E1E;
-    padding: 0.5rem;
+    background-color: var(--color-background-2);
+    box-shadow: 0 0 30px 0px;
+    padding: 1rem;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
@@ -210,7 +234,7 @@ main {
 
 .navbar-title {
     text-decoration: none;
-    color: #F0F0F0;
+    color: var(--color-font);
     font-size: 1.5rem;
 }
 
@@ -228,21 +252,25 @@ main {
 
 .go-to-buttons ul li {
     list-style: none;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 .go-to-buttons ul li a {
     text-decoration: none;
-    color: #F0F0F0;
+    color: var(--color-secondary);
+
+    transition-duration: 0.3s;
+    transition-property: background-color;
+    transition-timing-function: ease-out;
 }
 
 .go-to-buttons ul li a:hover {
-    text-decoration: none;
-    color: cyan;
+    background-color: var(--color-background);
+    border-radius: 0.4rem;
 }
 
 .current-page {
-    color: cyan;
+    color: var(--color-primary);
 }
 
 /* HOME CONTENT */
@@ -598,6 +626,13 @@ main {
 @media only screen and (max-width: 699px) {
     .cards-container{
         grid-template-columns: repeat(2, 11rem);
+    }
+}
+
+
+@media only screen and (min-width: 768px) {
+    .go-to-buttons ul li a {
+        padding: 0.5rem;
     }
 }
 

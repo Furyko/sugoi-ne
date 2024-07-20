@@ -8,8 +8,14 @@
     text-decoration: none;
 }
 
+.welcome-container {
+    background: var(--color-background-2);
+    border-radius: 1rem;
+    padding-bottom: 1.5rem;
+}
+
 .welcome {
-    padding: 1rem;
+    padding: 3rem 1rem 1rem 1rem;
 }
 
 .welcome h2 {
