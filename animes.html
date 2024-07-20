@@ -40,7 +40,7 @@
             <div class="search-bar-container">
                 <form id="search-form" action="#">
                     <input type="text" class="search-bar" placeholder="Busca un anime por nombre" id="search-bar"/>
-                    <button class="search-button" onclick="searchAnimeByName()" id="search-button">
+                    <button class="search-button btn-secondary" onclick="searchAnimeByName()" id="search-button">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
@@ -51,12 +51,12 @@
             <div class="list-navigation">
                 <div class="list-info-container" id="list-info-container"></div>
                 <div class="previous-next-buttons-container">
-                    <button onclick="getPreviousAnimeList()" id="previous-button">Anterior</button>
+                    <button onclick="getPreviousAnimeList()" id="previous-button" class="btn-secondary btn-prev">Anterior</button>
                     <form id="goto-form" action="#">
                         <input class="page-number-input" type="number" placeholder="Pag" id="page-value-input"/>
-                        <input type="button" value="Ir" id="goto-page-input" onclick="goToExactPage()"/>
+                        <input type="button" value="Ir" id="goto-page-input" class="btn-secondary btn-goto" onclick="goToExactPage()"/>
                     </form>
-                    <button onclick="getNextAnimeList()" id="next-button">Siguiente</button>
+                    <button onclick="getNextAnimeList()" id="next-button" class="btn-secondary btn-next">Siguiente</button>
                 </div>
             </div>
         </main>
