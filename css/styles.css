@@ -8,7 +8,9 @@
     --color-7: #FFFFFF;
     --color-8: #000000;
     --color-primary: var(--color-3);
+    --color-primary-hover: #374fbd;
     --color-secondary: var(--color-5);
+    --color-secondary-hover: #3fa7c7;
     --color-background: var(--color-6);
     --color-background-2: var(--color-7);
     --color-font: var(--color-8);
@@ -26,7 +28,9 @@
     --color-8: #000000;
     --color-9: #05091E;
     --color-primary: var(--color-2);
+    --color-primary-hover: #212a83;
     --color-secondary: var(--color-5);
+    --color-secondary-hover: #40aaca;
     --color-background: var(--color-9);
     --color-background-2: var(--color-1);
     --color-font: var(--color-7);
@@ -95,6 +99,12 @@ span {
 }
 
 /*Buttons*/
+.btn-primary, .btn-secondary {
+    transition-duration: 0.3s;
+    transition-property: background-color;
+    transition-timing-function: ease-out;
+}
+
 .btn-primary {
     background-color: var(--color-primary);
     border: none;
@@ -103,12 +113,20 @@ span {
     padding: 0.5rem;
 }
 
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
 .btn-secondary {
     background-color: var(--color-secondary);
     border: none;
     border-radius: 0.5rem;
     color: var(--color-font-secondary);
     padding: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
 }
 
 .btn-prev {
@@ -130,7 +148,7 @@ span {
     padding: 1rem;
 
     transition-duration: 0.3s;
-    transition-property: scale, box-shadow;
+    transition-property: scale, box-shadow, background-color;
     transition-timing-function: ease-out;
 }
 
