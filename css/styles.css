@@ -48,6 +48,10 @@ main {
     padding: 3rem 1.5rem 1.5rem 1.5rem;
 }
 
+span {
+    color: var(--color-font);
+}
+
 /* ELEMENTS */
 /*Loading animation*/
 
@@ -79,7 +83,15 @@ main {
 .switch-mode-button {
     border-radius: 50%;
     border: none;
-    width: 35px;
+    height: 34px;
+    width: 34px;
+}
+
+/*Content container*/
+.content-container {
+    background: var(--color-background-2);
+    border-radius: 1rem;
+    padding: 1.5rem 0 1.5rem 0;
 }
 
 /*Buttons*/
@@ -358,7 +370,7 @@ main {
 .card {
     height: 17.6rem; 
     width: 11rem; 
-    border: 6px solid var(--color-4);
+    border: 6px solid var(--color-primary);
     border-radius: 1rem;
     overflow: hidden;
     background-color: var(--color-background);

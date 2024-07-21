@@ -72,13 +72,12 @@ async function showAnimeCards(data) {
 
 async function showAnimeListInfo(data) {
     let animeListData = data
+    let valueInput = document.getElementById('page-value-input')
+    valueInput.value = animeListData.pagination.current_page
     let pagesTotal = document.createElement("span")
     pagesTotal.innerHTML = "Total de paginas: " + animeListData.pagination.last_visible_page
-    let currentPage = document.createElement("span")
-    currentPage.innerHTML = "Pagina actual: " + animeListData.pagination.current_page
     let infoContainer = document.getElementById("list-info-container")
     infoContainer.appendChild(pagesTotal)
-    infoContainer.appendChild(currentPage)
     updateGoToPageButtons(data)
 }
 

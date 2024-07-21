@@ -73,13 +73,12 @@ async function showMangaCards(data) {
 
 async function showMangaListInfo(data) {
     let mangaListData = data
+    let valueInput = document.getElementById('page-value-input')
+    valueInput.value = mangaListData.pagination.current_page
     let pagesTotal = document.createElement("span")
     pagesTotal.innerHTML = "Total de paginas: " + mangaListData.pagination.last_visible_page
-    let currentPage = document.createElement("span")
-    currentPage.innerHTML = "Pagina actual: " + mangaListData.pagination.current_page
     let infoContainer = document.getElementById("list-info-container")
     infoContainer.appendChild(pagesTotal)
-    infoContainer.appendChild(currentPage)
     updateGoToPageButtons(data)
 }
 
