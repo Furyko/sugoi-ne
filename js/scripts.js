@@ -9,9 +9,9 @@ function toggleDarkMode() {
     else localStorage.setItem("dark-mode", false)
 }
 
-function startPage() {
+function validateDarkMode() {
     const darkMode = localStorage.getItem('dark-mode')
     if (darkMode && darkMode == 'true') toggleDarkMode()
 }
 
-setTimeout(function() { startPage() }, 1);
+setTimeout(function() { validateDarkMode() }, 1);
