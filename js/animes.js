@@ -67,6 +67,7 @@ async function showAnimeCards(data) {
         errorContainer.appendChild(errorMessage2)
         errorContainer.appendChild(reloadButton)
         mainContainer.appendChild(errorContainer)
+        disableNavigationButtons(true)
     }
 }
 

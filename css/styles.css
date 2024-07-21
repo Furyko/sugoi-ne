@@ -121,6 +121,10 @@ a {
     background-color: var(--color-primary-hover);
 }
 
+.btn-primary:disabled {
+    background-color: var(--color-primary-hover);
+}
+
 .btn-secondary {
     background-color: var(--color-secondary);
     border: none;
@@ -130,6 +134,10 @@ a {
 }
 
 .btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.btn-secondary:disabled {
     background-color: var(--color-secondary-hover);
 }
 

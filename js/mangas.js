@@ -68,6 +68,7 @@ async function showMangaCards(data) {
         errorContainer.appendChild(errorMessage2)
         errorContainer.appendChild(reloadButton)
         mainContainer.appendChild(errorContainer)
+        disableNavigationButtons(true)
     }
 }
 

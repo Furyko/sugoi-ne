@@ -68,6 +68,7 @@ async function showCharactersCards(data) {
         errorContainer.appendChild(errorMessage2)
         errorContainer.appendChild(reloadButton)
         mainContainer.appendChild(errorContainer)
+        disableNavigationButtons(true)
     }
 }
 
