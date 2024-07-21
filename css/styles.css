@@ -89,6 +89,8 @@ a {
 
 /*Dark/Light mode button*/
 .switch-mode-button {
+    background-color: var(--color-background);
+    color: var(--color-font);
     border-radius: 50%;
     border: none;
     height: 34px;
