@@ -5,8 +5,14 @@ switchModeBtn.addEventListener('click', (e) => {
 
 function toggleDarkMode() {
     document.documentElement.classList.toggle('dark-mode');
-    if (document.documentElement.classList.contains('dark-mode')) localStorage.setItem("dark-mode", true)
-    else localStorage.setItem("dark-mode", false)
+    if (document.documentElement.classList.contains('dark-mode')) {
+        localStorage.setItem("dark-mode", true)
+        switchModeBtn.innerHTML = '<i class="fas fa-moon"></i>'
+    }
+    else {
+        localStorage.setItem("dark-mode", false)
+        switchModeBtn.innerHTML = '<i class="fas fa-sun"></i>'
+    }
 }
 
 function validateDarkMode() {
