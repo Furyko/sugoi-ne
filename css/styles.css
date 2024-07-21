@@ -355,26 +355,23 @@ main {
     row-gap: 2.6rem;
 }
 
-.card:hover {
-    scale: 1.1;
-    box-shadow: 0 0 20px 0 #808080;
-}
-
 .card {
     height: 17.6rem; 
     width: 11rem; 
     border: 6px solid var(--color-4);
     border-radius: 1rem;
     overflow: hidden;
-    background-color: white;
+    background-color: var(--color-background);
 
     transition-duration: 0.3s;
-transition-property: scale, box-shadow;
-transition-timing-function: ease-out;
+    transition-property: scale, box-shadow;
+    transition-timing-function: ease-out;
 }
 
 .card:hover {
     height: min-content;
+    scale: 1.1;
+    box-shadow: 0 0 20px 0 #808080;
 }
 
 .card a {
