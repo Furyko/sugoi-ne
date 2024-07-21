@@ -56,6 +56,10 @@ div, span {
     color: var(--color-font);
 }
 
+a {
+    text-decoration: none;
+}
+
 /* ELEMENTS */
 /*Loading animation*/
 
@@ -170,7 +174,6 @@ div, span {
     width: 100%;
     background-color: var(--color-background-2);
     z-index: 0;
-    border: 1px solid black;
     border-radius: 2rem;
     padding: 1rem;
     overflow: hidden;
@@ -226,7 +229,7 @@ div, span {
   width: auto;
   padding: 1.2rem;
   margin-top: -22px;
-  color: black;
+  color: var(--color-font);
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -240,12 +243,6 @@ div, span {
 
 .prev {
     left: 0;
-}
-
-.next, .prev {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 2rem;
 }
 
 .prev:hover, .next:hover {
@@ -487,6 +484,14 @@ div, span {
     align-items: center;
     position: relative;
     flex-direction: column;
+
+    transition-duration: 0.3s;
+    transition-property: scale;
+    transition-timing-function: ease-out;
+}
+
+.box-1:hover, .box-2:hover, .box-3:hover {
+    scale: 1.1;
 }
 
 .box-1:nth-child(2n), .box-2:nth-child(2n), .box-3:nth-child(2n) {
@@ -744,4 +749,5 @@ div, span {
 
 .footer-text {
     color: #F0F0F0;
+    text-decoration: underline;
 }
