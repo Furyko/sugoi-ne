@@ -16,6 +16,7 @@
 
 .welcome {
     padding: 3rem 1rem 1rem 1rem;
+    color: var(--color-font);
 }
 
 .welcome h2 {
