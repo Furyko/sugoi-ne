@@ -15,6 +15,8 @@
     --color-background-2: var(--color-7);
     --color-font: var(--color-8);
     --color-font-secondary: var(--color-7);
+    --color-hero: var(--color-8);
+    --color-hero-description: var(--color-8);
 }
 
 :root.dark-mode {
@@ -35,6 +37,8 @@
     --color-background-2: var(--color-1);
     --color-font: var(--color-7);
     --color-font-secondary: var(--color-7);
+    --color-hero: var(--color-7);
+    --color-hero-description: var(--color-7);
 }
 
 body {
@@ -68,11 +72,10 @@ a {
     margin: auto;
     left: 0;
     right: 0;
-    width: 40px;
-    height: 40px;
-    border: 10px solid #eee;
-    border-top: 10px solid #666;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
+
     animation-name: spin-loading;
     animation-duration: 2s;
     animation-iteration-count: infinite;
@@ -352,7 +355,7 @@ a {
 
 .go-to-buttons ul li a {
     text-decoration: none;
-    color: var(--color-secondary);
+    color: var(--color-primary);
 
     transition-duration: 0.3s;
     transition-property: background-color;
@@ -365,7 +368,7 @@ a {
 }
 
 .current-page {
-    color: var(--color-primary);
+    color: var(--color-secondary);
 }
 
 /* HOME CONTENT */
