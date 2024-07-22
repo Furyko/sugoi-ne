@@ -338,6 +338,16 @@ a {
     align-items: center;
 }
 
+.navbar-banner {
+    display: none;
+    height: 1.5rem;
+}
+
+.navbar-logo {
+    display: inline;
+    height: 2rem;
+}
+
 .go-to-buttons-container {
     display: flex;
 }
@@ -747,6 +757,14 @@ a {
 
     main {
         padding: 3rem 3rem 1.5rem 3rem;
+    }
+
+    .navbar-banner {
+        display: inline;
+    }
+
+    .navbar-logo {
+        display: none;
     }
 }
 
