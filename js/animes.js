@@ -88,7 +88,8 @@ function displayLoadingFeedback() {
     loadingAnimationContainer.setAttribute("id", "loading-animation-container")
     let loadingFeedback = document.createElement("img")
     loadingFeedback.setAttribute("class", "loading-animation")
-    loadingFeedback.setAttribute("src", "resources/images/sharingan.png")
+    if (isDarkModeEnabled()) loadingFeedback.setAttribute("src", "resources/images/rinnegan.webp")
+    else loadingFeedback.setAttribute("src", "resources/images/sharingan.png")
     loadingAnimationContainer.appendChild(loadingFeedback)
     let mainContainer = document.getElementById("main-container")
     mainContainer.appendChild(loadingAnimationContainer)
@@ -183,6 +184,11 @@ async function searchAnimeByName() {
     showAnimeCards(await data)
     cleanLoadingFeedback()
     disableNavigationButtons(false)
+}
+
+function isDarkModeEnabled() {
+    const darkMode = localStorage.getItem('dark-mode')
+    return darkMode && darkMode == 'true'
 }
 
 function reloadPage() {
