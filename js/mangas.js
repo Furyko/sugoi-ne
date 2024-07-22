@@ -61,7 +61,7 @@ async function showMangaCards(data) {
         errorMessage2.innerHTML = "Revisa tu conexión a internet y prueba otra vez, por favor."
         errorContainer.setAttribute('class', 'center flex-column')
         errorTitle.setAttribute('class', 'bold-text font-subtitle')
-        reloadButton.setAttribute('class', 'button')
+        reloadButton.setAttribute('class', 'btn-primary')
         reloadButton.setAttribute('onclick', 'reloadPage()')
         errorContainer.appendChild(errorTitle)
         errorContainer.appendChild(errorMessage)
